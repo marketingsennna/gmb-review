@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Write a Google Review</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<style>
+/* SAME DESIGN (UNCHANGED) */
+:root{
+  --primary:#2563eb;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e5e7eb;
+}
+
+*{box-sizing:border-box}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+  background:linear-gradient(135deg,#f8fafc,#eef2ff);
+  margin:0;
+  padding:20px;
+  color:var(--text);
+}
+
+.container{
+  max-width:620px;
+  margin:auto;
+  background:var(--card);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{text-align:center;margin-bottom:6px}
+.sub{text-align:center;color:var(--muted);margin-bottom:20px}
+
+.services{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
+  max-height:260px;
+  overflow:auto;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+
+textarea{
+  width:100%;
+  height:150px;
+  margin-top:14px;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Share Your Experience</h1>
+<div class="sub">Your review will be generated automatically</div>
+
+<form id="reviewForm">
+
+<div class="section">
+<label>Select services</label>
+<div class="note">You can select multiple services</div>
+
+<div class="services">
+<label><input type="checkbox" value="Digital Marketing"> Digital Marketing</label>
+<label><input type="checkbox" value="SEO"> SEO</label>
+<label><input type="checkbox" value="Website Development"> Website Development</label>
+</div>
+
+<br>
+
+<select id="rating">
+<option value="">Select Rating</option>
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+
+<br><br>
+
+<input id="location" placeholder="Enter your city">
+
+<br><br>
+
+<button type="submit">Generate Review</button>
+
+</form>
+
+<div id="status"></div>
+
+<textarea id="review" readonly></textarea>
+
+</div>
+
+<script>
+
+const backendURL = "YOUR_NODE_API"; // 👈 change this
+const googleURL = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ"; // 👈 change this
+
+const form = document.getElementById("reviewForm");
+const status = document.getElementById("status");
+const reviewBox = document.getElementById("review");
+
+form.addEventListener("submit", async (e)=>{
+e.preventDefault();
+
+const services=[...document.querySelectorAll("input[type=checkbox]:checked")].map(i=>i.value);
+const rating=document.getElementById("rating").value;
+const location=document.getElementById("location").value.trim();
+
+if(!services.length){
+alert("Select service");
+return;
+}
+
+if(!rating){
+alert("Select rating");
+return;
+}
+
+if(!location){
+alert("Enter location");
+return;
+}
+
+// ⭐ LOW RATING STOP
+if(rating <=3){
+status.innerText="🙏 Thank you for your feedback!";
+return;
+}
+
+status.innerText="Generating review...";
+
+try{
+
+const res = await fetch(backendURL,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({services,rating,location})
+});
+
+const data = await res.json();
+
+let text = data.review;
+
+reviewBox.value = text;
+
+// ✅ AUTO COPY
+await navigator.clipboard.writeText(text);
+
+status.innerText="Opening Google Review...";
+
+// ✅ AUTO OPEN
+setTimeout(()=>{
+window.open(googleURL,"_blank");
+},800);
+
+}catch(err){
+status.innerText="Error generating review";
+}
+
+});
+
+// ⭐ HIDE TEXTAREA LOW RATING
+document.getElementById("rating").addEventListener("change", function(){
+const rating=this.value;
+if(rating <=3 && rating !== ""){
+reviewBox.style.display="none";
+}else{
+reviewBox.style.display="block";
+}
+});
+
+</script>
+
+</body>
+</html>
