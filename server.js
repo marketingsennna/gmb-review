@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = "AIzaSyDZ0X7lrAaCkGQAe6M3sx-SMK6UOWrohDE";
+const API_KEY = "API KEY;
 
 app.post("/generate", async (req, res) => {
 
@@ -26,7 +26,7 @@ Make it human and natural.`;
       {
         headers: {
           "Content-Type": "application/json",
-          "x-goog-api-key": AIzaSyDZ0X7lrAaCkGQAe6M3sx-SMK6UOWrohDE
+          "x-goog-api-key": API Key
         }
       }
     );
