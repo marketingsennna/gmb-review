@@ -259,10 +259,12 @@ return;
 
 // ⭐ LOW RATING STOP
 if(rating <=3){
+status.style.color = "#16a34a";
 status.innerText="🙏 Thank you for your feedback!";
 return;
 }
-
+  
+status.style.color = "#16a34a";
 status.innerText="Generating review...";
 
 try{
@@ -282,6 +284,7 @@ reviewBox.value = text;
 // ✅ AUTO COPY
 await navigator.clipboard.writeText(text);
 
+status.style.color = "#16a34a"; 
 status.innerText="Opening Google Review...";
 
 // ✅ AUTO OPEN
@@ -290,6 +293,7 @@ window.open(googleURL,"_blank");
 },800);
 
 }catch(err){
+status.style.color = "red";
 status.innerText="Error generating review";
 }
 
