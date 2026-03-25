@@ -305,6 +305,25 @@ reviewBox.style.display="block";
 }
 });
 
+
+  // ⭐ Hide textarea + footer for low rating
+
+document.getElementById("rating").addEventListener("change", function(){
+
+const rating = this.value;
+const reviewBox = document.getElementById("review");
+const footer = document.getElementById("reviewFooter");
+
+if(rating <= 3 && rating !== ""){
+reviewBox.style.display = "none";
+footer.style.display = "none";
+} else {
+reviewBox.style.display = "block";
+footer.style.display = "block";
+}
+
+});
+
 </script>
 
 </body>
