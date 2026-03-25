@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = "API KEY;
+const API_KEY = "API KEY";
 
 app.post("/generate", async (req, res) => {
 
