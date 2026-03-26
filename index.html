@@ -241,11 +241,17 @@ const backendURL = "https://marketingsennna.onrender.com/generate"
 const googleURL = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ"; 
 
 const form = document.getElementById("reviewForm");
+  
+const submitBtn = form.querySelector("button");  
+  
 const status = document.getElementById("status");
 const reviewBox = document.getElementById("review");
 
 form.addEventListener("submit", async (e)=>{
 e.preventDefault();
+
+submitBtn.disabled = true;
+submitBtn.innerText = "Generating...";
 
 const services=[...document.querySelectorAll("input[type=checkbox]:checked")].map(i=>i.value);
 const rating=document.getElementById("rating").value;
@@ -295,6 +301,9 @@ let text = data.review;
 
 reviewBox.value = text;
 
+submitBtn.disabled = false;
+submitBtn.innerText = "Generate Review";
+
 // ✅ AUTO COPY
 await navigator.clipboard.writeText(text);
 
@@ -309,6 +318,9 @@ window.open(googleURL,"_blank");
 }catch(err){
 status.style.color = "red";
 status.innerText="Error generating review";
+
+submitBtn.disabled = false;
+submitBtn.innerText = "Generate Review";
 }
 
 });
