@@ -228,6 +228,15 @@ After generation, review copied automatic and Google Review page will open autom
 
 <script>
 
+let token = "";
+
+// 🔥 page load पर token fetch होगा
+fetch("https://marketingsennna.onrender.com/get-token")
+  .then(res => res.json())
+  .then(data => {
+    token = data.token;
+  });
+
 const backendURL = "https://marketingsennna.onrender.com/generate"
 const googleURL = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ"; 
 
@@ -272,7 +281,12 @@ try{
 const res = await fetch(backendURL,{
 method:"POST",
 headers:{"Content-Type":"application/json"},
-body:JSON.stringify({services,rating,location})
+body:JSON.stringify({
+  services,
+  rating,
+  location,
+  token: token
+})
 });
 
 const data = await res.json();
