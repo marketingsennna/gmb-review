@@ -41,24 +41,47 @@ button{
 <form id="form">
 
 <!-- SERVICES -->
-<label>Select Service</label>
-<select id="service">
-<option value="">Select</option>
-<option value="Website Development">Website Development</option>
-<option value="SEO">SEO</option>
-<option value="Digital Marketing">Digital Marketing</option>
-</select>
+ <label>Select services</label>
+<div class="note">You can select multiple services</div>
+<div class="services">
+<label><input type="checkbox" name="services" value="Facebook and Instagram Ads"> Facebook and Instagram Ads</label>
+    <label><input type="checkbox" name="services" value="Lead Generation"> Lead Generation</label>
+    <label><input type="checkbox" name="services" value="Social Media Marketing and Management"> Social Media Marketing and Management</label>
+    <label><input type="checkbox" name="services" value="Digital Marketing"> Digital Marketing</label>
+    <label><input type="checkbox" name="services" value="Google My Business Profile Creation and Optimization"> Google My Business Profile Creation and Optimization</label>
+    <label><input type="checkbox" name="services" value="GMB Call Verification"> GMB Call Verification</label>
+    <label><input type="checkbox" name="services" value="GMB Suspension Removal"> GMB Suspension Removal</label>
+    <label><input type="checkbox" name="services" value="GMB Management"> GMB Management</label>
+    <label><input type="checkbox" name="services" value="Local SEO"> Local SEO</label>
+    <label><input type="checkbox" name="services" value="Video Editing"> Video Editing</label>
+    <label><input type="checkbox" name="services" value="Graphic Design"> Graphic Design</label>
+    <label><input type="checkbox" name="services" value="WhatsApp Marketing"> WhatsApp Marketing</label>
+    <label><input type="checkbox" name="services" value="NFC and QR Code Digital Visiting Card"> NFC and QR Code Digital Visiting Card</label>
+    <label><input type="checkbox" name="services" value="Content Writing"> Content Writing</label>
+    <label><input type="checkbox" name="services" value="SEO"> SEO</label>
+    <label><input type="checkbox" name="services" value="GMB Ads"> GMB Ads</label>
+    <label><input type="checkbox" name="services" value="Business Consulting"> Business Consulting</label>
+    <label><input type="checkbox" name="services" value="AI Automation"> AI Automation</label>
+    <label><input type="checkbox" name="services" value="Advertising and Branding"> Advertising and Branding</label>
+    <label><input type="checkbox" name="services" value="Website Development and Design"> Website Development and Design</label>
+    <label><input type="checkbox" name="services" value="Software Development"> Software Development</label>
+    <label><input type="checkbox" name="services" value="Mobile App Development"> Mobile App Development</label>
+    <label><input type="checkbox" name="services" value="CRM Development"> CRM Development</label>
+    <label><input type="checkbox" name="services" value="Landing Page Development"> Landing Page Development</label>
+</div>
+</div>
+
 
 <!-- RATING -->
-<label>Rating</label>
-<select id="rating">
-<option value="">Select</option>
-<option value="5">⭐⭐⭐⭐⭐</option>
-<option value="4">⭐⭐⭐⭐</option>
-<option value="3">⭐⭐⭐</option>
-<option value="2">⭐⭐</option>
-<option value="1">⭐</option>
-</select>
+<label>Select Rating</label>
+  <select id="rating">
+    <option value="">Choose rating</option>
+    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+    <option value="4">⭐⭐⭐⭐ Good</option>
+    <option value="3">⭐⭐⭐ Average</option>
+    <option value="2">⭐⭐ Poor</option>
+    <option value="1">⭐ Very Poor</option>
+  </select>
 
 <!-- LOCATION -->
 <label>Location</label>
@@ -156,13 +179,13 @@ silenceTimer = setTimeout(() => {
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
 
-const service=document.getElementById("service").value;
+const services = [...document.getElementById("services").selectedOptions].map(o=>o.value);
 const rating=document.getElementById("rating").value;
 const location=document.getElementById("location").value;
 const input=document.getElementById("inputText").value;
 
 // VALIDATION
-if(!service||!rating||!location||!input){
+if(!services.length || !rating || !location || !input){
 alert("Fill all fields");
 return;
 }
@@ -178,7 +201,7 @@ const res=await fetch("https://marketingsennna.onrender.com/generate",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
-service,
+services,
 location,
 input,
 token
