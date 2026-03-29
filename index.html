@@ -2,155 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Write a Google Review</title>
+<title>Review Generator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="data:,">
 
 <style>
-:root{
-  --primary:#2563eb;
-  --bg:#f8fafc;
-  --card:#ffffff;
-  --text:#0f172a;
-  --muted:#64748b;
-  --border:#e5e7eb;
-}
-
-*{box-sizing:border-box}
-
 body{
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-  background: linear-gradient(135deg,#f8fafc,#eef2ff);
-  margin:0;
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
   padding:20px;
-  color:var(--text);
 }
-
 .container{
-  max-width:620px;
+  max-width:500px;
   margin:auto;
-  background:var(--card);
-  border-radius:18px;
-  padding:24px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-
-h1{
-  font-size:22px;
-  text-align:center;
-  margin:0 0 6px;
-}
-
-.sub{
-  text-align:center;
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:20px;
-}
-
-.section{
-  margin-bottom:22px;
-}
-
-.section label{
-  font-weight:600;
-  font-size:14px;
-}
-
-.note{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-.services{
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px;
-  max-height:260px;
-  overflow:auto;
-  margin-top:10px;
-}
-
-.services label{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:6px 0;
-  font-size:14px;
-  cursor:pointer;
-}
-
-.services input{
-  accent-color:var(--primary);
-}
-
-input[type="text"]{
+textarea,input,select,button{
   width:100%;
-  padding:12px 14px;
+  margin-top:10px;
+  padding:12px;
   border-radius:10px;
-  border:1px solid var(--border);
-  margin-top:10px;
-  font-size:14px;
-}
-
-input[type="text"]:focus{
-  outline:none;
-  border-color:var(--primary);
-}
-
-button{
-  width:100%;
   border:none;
-  border-radius:14px;
-  padding:14px;
-  font-size:16px;
-  font-weight:600;
-  background:var(--primary);
-  color:#fff;
+}
+button{
+  background:#3b82f6;
+  color:white;
   cursor:pointer;
-  transition:.2s;
 }
-
-button:hover{opacity:.9}
-
-.status{
-  text-align:center;
-  font-size:14px;
-  margin-top:12px;
-}
-
-textarea{
-  width:100%;
-  height:150px;
-  margin-top:14px;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  font-size:14px;
-  background:#f9fafb;
-}
-
-.footer{
-  text-align:center;
-  margin-top:16px;
-  font-size:12px;
-  color:var(--muted);
-}
-
- .section{
-  margin-bottom: 24px;
-}
-
-#rating{
-  margin-top: 10px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  font-size: 14px;
-}
-  
+.speak{background:#22c55e;}
 </style>
 </head>
 
@@ -158,203 +36,113 @@ textarea{
 
 <div class="container">
 
-<h1>Share Your Experience</h1>
-<div class="sub">Your review will be generated automatically</div>
+<h2>Share Your Experience</h2>
 
-<form id="reviewForm">
+<form id="form">
 
-<div class="section">
-<label>Select services</label>
-<div class="note">You can select multiple services</div>
+<!-- SERVICES -->
+<label>Select Service</label>
+<select id="service">
+<option value="">Select</option>
+<option value="Website Development">Website Development</option>
+<option value="SEO">SEO</option>
+<option value="Digital Marketing">Digital Marketing</option>
+</select>
 
-<div class="services">
-<label><input type="checkbox" name="services" value="Facebook and Instagram Ads"> Facebook and Instagram Ads</label>
-    <label><input type="checkbox" name="services" value="Lead Generation"> Lead Generation</label>
-    <label><input type="checkbox" name="services" value="Social Media Marketing and Management"> Social Media Marketing and Management</label>
-    <label><input type="checkbox" name="services" value="Digital Marketing"> Digital Marketing</label>
-    <label><input type="checkbox" name="services" value="Google My Business Profile Creation and Optimization"> Google My Business Profile Creation and Optimization</label>
-    <label><input type="checkbox" name="services" value="GMB Call Verification"> GMB Call Verification</label>
-    <label><input type="checkbox" name="services" value="GMB Suspension Removal"> GMB Suspension Removal</label>
-    <label><input type="checkbox" name="services" value="GMB Management"> GMB Management</label>
-    <label><input type="checkbox" name="services" value="Local SEO"> Local SEO</label>
-    <label><input type="checkbox" name="services" value="Video Editing"> Video Editing</label>
-    <label><input type="checkbox" name="services" value="Graphic Design"> Graphic Design</label>
-    <label><input type="checkbox" name="services" value="WhatsApp Marketing"> WhatsApp Marketing</label>
-    <label><input type="checkbox" name="services" value="NFC and QR Code Digital Visiting Card"> NFC and QR Code Digital Visiting Card</label>
-    <label><input type="checkbox" name="services" value="Content Writing"> Content Writing</label>
-    <label><input type="checkbox" name="services" value="SEO"> SEO</label>
-    <label><input type="checkbox" name="services" value="GMB Ads"> GMB Ads</label>
-    <label><input type="checkbox" name="services" value="Business Consulting"> Business Consulting</label>
-    <label><input type="checkbox" name="services" value="AI Automation"> AI Automation</label>
-    <label><input type="checkbox" name="services" value="Advertising and Branding"> Advertising and Branding</label>
-    <label><input type="checkbox" name="services" value="Website Development and Design"> Website Development and Design</label>
-    <label><input type="checkbox" name="services" value="Software Development"> Software Development</label>
-    <label><input type="checkbox" name="services" value="Mobile App Development"> Mobile App Development</label>
-    <label><input type="checkbox" name="services" value="CRM Development"> CRM Development</label>
-    <label><input type="checkbox" name="services" value="Landing Page Development"> Landing Page Development</label>
-</div>
-</div>
+<!-- RATING -->
+<label>Rating</label>
+<select id="rating">
+<option value="">Select</option>
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
 
-<div class="section">
-  <label>Select Rating</label>
-  
-  <select id="rating">
-    <option value="">Choose rating</option>
-    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-    <option value="4">⭐⭐⭐⭐ Good</option>
-    <option value="3">⭐⭐⭐ Average</option>
-    <option value="2">⭐⭐ Poor</option>
-    <option value="1">⭐ Very Poor</option>
-  </select>
-</div>
+<!-- LOCATION -->
+<label>Location</label>
+<input id="location" placeholder="e.g. Vesu, Surat">
 
-<div class="section">
-<label>Your City / Area</label>
-<input type="text" id="location" placeholder="e.g. Surat, Vesu">
-</div>
+<!-- SPEECH -->
+<button type="button" class="speak" onclick="startListening()">🎤 Speak</button>
 
-<button id="generateBtn" type="submit">Generate My Review</button>
+<textarea id="inputText" placeholder="Speak or write your experience..."></textarea>
+
+<button type="submit">Generate Review</button>
 
 </form>
 
-<div id="status" class="status"></div>
-
-<textarea id="review" readonly placeholder="Your generated review will appear here..."></textarea>
-
-<div id="reviewFooter" class="footer">
-After generation, review copied automatic and Google Review page will open automatically. Paste Your Review!
-</div>
+<textarea id="output" placeholder="Generated review"></textarea>
 
 </div>
 
 <script>
 
-let token = "";
+let token="";
 
-// 🔥 page load पर token fetch होगा
+// TOKEN FETCH
 fetch("https://marketingsennna.onrender.com/get-token")
-  .then(res => res.json())
-  .then(data => {
-    token = data.token;
-  });
+.then(res=>res.json())
+.then(data=>token=data.token);
 
-const backendURL = "https://marketingsennna.onrender.com/generate"
-const googleURL = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ"; 
+// SPEECH
+function startListening(){
+const recognition=new(window.SpeechRecognition||window.webkitSpeechRecognition)();
+recognition.lang="en-IN";
+recognition.start();
 
-const form = document.getElementById("reviewForm");
-  
-const submitBtn = form.querySelector("button");  
-  
-const status = document.getElementById("status");
-const reviewBox = document.getElementById("review");
+recognition.onresult=function(e){
+document.getElementById("inputText").value=e.results[0][0].transcript;
+};
+}
 
-form.addEventListener("submit", async (e)=>{
+// FORM
+document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
 
-submitBtn.disabled = true;
-submitBtn.innerText = "Generating...";
-
-const services=[...document.querySelectorAll("input[type=checkbox]:checked")].map(i=>i.value);
+const service=document.getElementById("service").value;
 const rating=document.getElementById("rating").value;
-const location=document.getElementById("location").value.trim();
+const location=document.getElementById("location").value;
+const input=document.getElementById("inputText").value;
 
-if(!services.length){
-alert("Select service");
+// VALIDATION
+if(!service||!rating||!location||!input){
+alert("Fill all fields");
 return;
 }
 
-if(!rating){
-alert("Select rating");
+// LOW RATING STOP
+if(rating<=3){
+alert("Thanks for feedback 🙏");
 return;
 }
 
-if(!location){
-alert("Enter location");
-return;
-}
-
-// ⭐ LOW RATING STOP
-if(rating <=3){
-status.style.color = "#16a34a";
-status.innerText="🙏 Thank you for your feedback!";
-return;
-}
-  
-status.style.color = "#16a34a";
-status.innerText="Generating review...";
-
-try{
-
-const primaryService = services[0];
-
-const res = await fetch(backendURL,{
+// API CALL
+const res=await fetch("https://marketingsennna.onrender.com/generate",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
-  services: primaryService,
-  location,
-  token: token
+service,
+location,
+input,
+token
 })
 });
-  
-});
 
-const data = await res.json();
+const data=await res.json();
 
-let text = data.review;
+const output=data.review;
 
-reviewBox.value = text;
+document.getElementById("output").value=output;
 
-submitBtn.disabled = false;
-submitBtn.innerText = "Generate Review";
+// AUTO COPY
+navigator.clipboard.writeText(output);
 
-// ✅ AUTO COPY
-await navigator.clipboard.writeText(text);
-
-status.style.color = "#16a34a"; 
-status.innerText="Opening Google Review...";
-
-// ✅ AUTO OPEN
+// OPEN GMB
 setTimeout(()=>{
-window.open(googleURL,"_blank");
+window.open("https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ","_blank");
 },800);
-
-}catch(err){
-status.style.color = "red";
-status.innerText="Error generating review";
-
-submitBtn.disabled = false;
-submitBtn.innerText = "Generate Review";
-}
-
-});
-
-// ⭐ HIDE TEXTAREA LOW RATING
-document.getElementById("rating").addEventListener("change", function(){
-const rating=this.value;
-if(rating <=3 && rating !== ""){
-reviewBox.style.display="none";
-}else{
-reviewBox.style.display="block";
-}
-});
-
-
-  // ⭐ Hide textarea + footer for low rating
-
-document.getElementById("rating").addEventListener("change", function(){
-
-const rating = this.value;
-const reviewBox = document.getElementById("review");
-const footer = document.getElementById("reviewFooter");
-
-if(rating <= 3 && rating !== ""){
-reviewBox.style.display = "none";
-footer.style.display = "none";
-} else {
-reviewBox.style.display = "block";
-footer.style.display = "block";
-}
 
 });
 
