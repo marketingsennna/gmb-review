@@ -285,15 +285,18 @@ status.innerText="Generating review...";
 
 try{
 
+const primaryService = services[0];
+
 const res = await fetch(backendURL,{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
-  services,
-  rating,
+  services: primaryService,
   location,
   token: token
 })
+});
+  
 });
 
 const data = await res.json();
