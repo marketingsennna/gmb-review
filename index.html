@@ -69,12 +69,22 @@ h2{
 
 .services label{
   display:flex;
-  align-items:flex-start;   /* 🔥 important fix */
-  gap:8px;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
   font-size:13px;
   padding:6px;
   cursor:pointer;
   line-height:1.3;
+}
+  .services label span{
+  flex:1;
+  text-align:left;
+}
+
+.services input{
+  order:2; /* 🔥 checkbox right side */
+  margin-top:3px;
 }
 
 .services label:hover{
@@ -85,13 +95,8 @@ input[type="checkbox"]{
   accent-color:var(--primary);
 }
 
- .services input{
-  margin-top:3px;
-  flex-shrink:0;
-}
-
-.services label span{
-  flex:1;
+  .services{
+  scrollbar-width:thin;
 }
 
 /* INPUTS */
