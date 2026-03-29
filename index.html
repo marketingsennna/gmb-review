@@ -83,12 +83,18 @@ h2{
   white-space:normal;   /* 🔥 IMPORTANT FIX */
 }
 
-/* ✅ CHECKBOX FIX */
-.services input{
-  margin-left:10px;
+  .services input{
+  order:2; /* 🔥 checkbox right side */
+  margin-top:3px;
 }
 
-  
+.services label:hover{
+  background:rgba(255,255,255,0.05);
+}
+
+input[type="checkbox"]{
+  accent-color:var(--primary);
+}
 
 /* INPUTS */
 input,select,textarea{
