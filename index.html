@@ -87,14 +87,65 @@ fetch("https://marketingsennna.onrender.com/get-token")
 .then(data=>token=data.token);
 
 // SPEECH
-function startListening(){
-const recognition=new(window.SpeechRecognition||window.webkitSpeechRecognition)();
-recognition.lang="en-IN";
-recognition.start();
+  
+let recognition;
+let isListening = false;
 
-recognition.onresult=function(e){
-document.getElementById("inputText").value=e.results[0][0].transcript;
-};
+function startListening(){
+
+  if(isListening){
+    recognition.stop();
+    isListening = false;
+    return;
+  }
+
+  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+  recognition.lang = "en-IN";
+  recognition.continuous = true;
+  recognition.interimResults = true;
+
+  let finalTranscript = "";
+  let silenceTimer;
+
+  recognition.start();
+  isListening = true;
+
+  recognition.onresult = function(event){
+
+    clearTimeout(silenceTimer);
+
+    let interim = "";
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+
+      let text = event.results[i][0].transcript;
+
+      if (event.results[i].isFinal) {
+        finalTranscript += text + " ";
+      } else {
+        interim += text;
+      }
+    }
+
+    document.getElementById("inputText").value =
+      finalTranscript + interim;
+
+    // 🔥 Silence detect (2 sec)
+    silenceTimer = setTimeout(() => {
+      recognition.stop();
+      isListening = false;
+    }, 2000);
+
+  };
+
+  recognition.onerror = function(e){
+    console.log("Error:", e.error);
+  };
+
+  recognition.onend = function(){
+    isListening = false;
+  };
 }
 
 // FORM
