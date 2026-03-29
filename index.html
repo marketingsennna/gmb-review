@@ -131,11 +131,15 @@ function startListening(){
     document.getElementById("inputText").value =
       finalTranscript + interim;
 
-    // 🔥 Silence detect (2 sec)
-    silenceTimer = setTimeout(() => {
-      recognition.stop();
-      isListening = false;
-    }, 2000);
+ // silence ke baad auto generate
+silenceTimer = setTimeout(() => {
+  recognition.stop();
+  isListening = false;
+
+  // 🔥 AUTO SUBMIT FORM
+  document.getElementById("form").requestSubmit();
+
+}, 2000);
 
   };
 
