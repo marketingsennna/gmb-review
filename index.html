@@ -66,29 +66,29 @@ h2{
   overflow-y:auto;
 }
 
-/* 🔥 MAIN FIX */
+/* ✅ CLEAN ROW */
 .services label{
   display:flex;
+  align-items:center;   /* 🔥 center alignment */
   justify-content:space-between;
-  align-items:center; /* 🔥 center align */
-  gap:10px;
   font-size:13px;
   padding:6px;
   cursor:pointer;
 }
 
-/* 🔥 TEXT FIX (NO WRAP) */
+/* ✅ TEXT FIX */
 .services label span{
-  white-space:nowrap;       /* 🔥 single line */
-  overflow:hidden;
-  text-overflow:ellipsis;   /* ... show */
   flex:1;
+  text-align:left;
+  white-space:normal;   /* 🔥 IMPORTANT FIX */
 }
 
-/* 🔥 CHECKBOX FIX */
+/* ✅ CHECKBOX FIX */
 .services input{
-  flex-shrink:0;
+  margin-left:10px;
 }
+
+  
 
 /* INPUTS */
 input,select,textarea{
