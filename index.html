@@ -385,6 +385,9 @@ function startListening(){
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
 
+    /* 🔥 PRE-OPEN TAB (IMPORTANT FIX) */
+const newTab = window.open("", "_blank");
+
 const services = [...document.querySelectorAll('input[name="services"]:checked')].map(el => el.value);
 const rating=document.getElementById("rating").value;
 const location=document.getElementById("location").value;
@@ -449,9 +452,11 @@ try{
 }catch{}
 
 /* OPEN GMB */
-setTimeout(()=>{
-window.open("https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ","_blank");
-},800);
+if(newTab){
+  newTab.location.href = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ";
+}else{
+  alert("Please allow popups to open Google review page");
+}
 
 /* SAVE STATE */
 localStorage.setItem("reviewDone", "true");
