@@ -313,8 +313,9 @@ button[type="submit"]:hover{
 
 <textarea id="output" placeholder="Generated review"></textarea>
   
-<button class="copy-btn" onclick="copyAgain()">Copy Review</button>
-
+<button id="copyBtn" class="copy-btn" onclick="copyAgain()" style="display:none;">
+  Copy Review
+</button>
 <p class="footer">Your feedback helps others make better decisions</p>
 
 </div>
@@ -503,6 +504,8 @@ if(data.already){
 /* ✅ FIRST TIME SUCCESS */
 document.getElementById("output").value=data.review;
 
+document.getElementById("copyBtn").style.display = "none"; // 🔥 first time hide
+
 
 /* 🔥 AUTO COPY (NO POPUP) */
 try{
@@ -547,6 +550,8 @@ window.addEventListener("load", async ()=>{
     }catch{
       // ignore (browser block)
     }
+     /* 🔥 SHOW COPY BUTTON (ADD HERE) */
+    document.getElementById("copyBtn").style.display = "block";
   }
 });
 
@@ -559,6 +564,9 @@ window.startListening = startListening;
   navigator.clipboard.writeText(text);
 
   alert("Copied again ✅");
+
+     /* optional hide again */
+  document.getElementById("copyBtn").style.display = "none";
 }
   
 </script>
