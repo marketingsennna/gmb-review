@@ -385,9 +385,6 @@ function startListening(){
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
 
-    /* 🔥 PRE-OPEN TAB (IMPORTANT FIX) */
-const newTab = window.open("", "_blank");
-
 const services = [...document.querySelectorAll('input[name="services"]:checked')].map(el => el.value);
 const rating=document.getElementById("rating").value;
 const location=document.getElementById("location").value;
@@ -448,22 +445,29 @@ document.getElementById("output").value=data.review;
 
 /* COPY */
 try{
-  navigator.clipboard.writeText(data.review);
-}catch{}
-
-/* OPEN GMB */
-if(newTab){
-  newTab.location.href = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ";
-}else{
-  alert("Please allow popups to open Google review page");
+  await navigator.clipboard.writeText(data.review);
+}catch{
+  // fallback copy
+  const temp = document.createElement("textarea");
+  temp.value = data.review;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand("copy");
+  document.body.removeChild(temp);
 }
+
+/* 🔥 USER MESSAGE */
+alert("✅ Review copied!\n\n👉 Google review page open ho raha hai\n👉 Paste karke submit kare");
+
+/* 🔥 DIRECT GMB OPEN (NO BLANK TAB) */
+window.location.href = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ";
 
 /* SAVE STATE */
 localStorage.setItem("reviewDone", "true");
 
 /* DISABLE UI */
 disableUI();
-
+  
 });
 
 /* 🔥 PAGE LOAD CHECK */
