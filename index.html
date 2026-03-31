@@ -265,7 +265,7 @@ button[type="submit"]:hover{
 </div>
 
 <div class="section">
-<button type="submit">Generate Review</button>
+<button type="submit" id="generateBtn">Generate Review</button>
 </div>
 
 </form>
@@ -311,11 +311,18 @@ let recognition;
 let isListening = false;
 
 function disableUI(){
-  document.getElementById("micBtn").disabled = true;
-  document.getElementById("generateBtn").disabled = true;
+  const mic = document.getElementById("micBtn");
+  const gen = document.getElementById("generateBtn");
 
-  document.getElementById("micBtn").style.opacity = "0.5";
-  document.getElementById("generateBtn").style.opacity = "0.5";
+  if(mic){
+    mic.disabled = true;
+    mic.style.opacity = "0.5";
+  }
+
+  if(gen){
+    gen.disabled = true;
+    gen.style.opacity = "0.5";
+  }
 }
 
 function startListening(){
