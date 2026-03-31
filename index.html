@@ -441,6 +441,11 @@ const res = await fetch("https://marketingsennna.onrender.com/generate",{
 /* ✅ FIXED (inside function) */
 const data = await res.json();
 
+localStorage.setItem("savedReview", data.review);
+
+/* 🔥 ADD HERE */
+localStorage.setItem("savedReview", data.review);
+
 /* 🔥 ALREADY GENERATED */
 if(data.already){
   document.getElementById("output").value = data.review;
@@ -483,8 +488,10 @@ disableUI();
 
 /* 🔥 PAGE LOAD CHECK */
 window.addEventListener("load", ()=>{
-  if(localStorage.getItem("reviewDone")){
-    disableUI();
+  const saved = localStorage.getItem("savedReview");
+
+  if(saved){
+    document.getElementById("output").value = saved;
   }
 });
 
