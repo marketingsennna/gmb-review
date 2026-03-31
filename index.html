@@ -6,58 +6,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root{
-  --primary:#2563eb;   /* trust blue */
-  --secondary:#0ea5e9; /* light blue */
-  --cta:#16a34a;       /* green CTA */
-  --bg:#f1f5f9;
+::root{
+  --primary:#2563eb;
+  --secondary:#4f46e5;
+  --cta:#16a34a;
+  --bg:#0f172a;
+  --card:#ffffff;
   --text:#0f172a;
   --muted:#64748b;
 }
 
-*{box-sizing:border-box}
-
-/* 🌈 CLEAN PROFESSIONAL GRADIENT */
+/* 🌈 ANIMATED PROFESSIONAL GRADIENT */
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-  background:linear-gradient(135deg,#e0f2fe,#eef2ff,#f8fafc);
+  background:linear-gradient(-45deg,#1e3a8a,#2563eb,#4f46e5,#0ea5e9);
+  background-size:400% 400%;
+  animation:gradientBG 12s ease infinite;
   margin:0;
   padding:20px;
   color:var(--text);
 }
 
-/* CONTAINER */
+@keyframes gradientBG{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* 💎 3D GLASS CARD */
 .container{
   max-width:620px;
   margin:auto;
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(12px);
-  border-radius:18px;
-  padding:24px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(14px);
+  border-radius:20px;
+  padding:26px;
+
+  /* 🔥 3D SHADOW */
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  
+  transform:perspective(1000px) translateY(0);
+  transition:.3s;
 }
 
-h1{
-  text-align:center;
-  color:var(--text);
+/* hover 3D lift */
+.container:hover{
+  transform:perspective(1000px) translateY(-5px) scale(1.01);
 }
 
-.sub{
-  text-align:center;
-  color:var(--muted);
-  margin-bottom:20px;
-}
-
+/* TEXT */
+h1{text-align:center}
+.sub{text-align:center;color:var(--muted);margin-bottom:20px}
 .section{margin-bottom:18px}
 
-/* ✅ SERVICES DROPDOWN */
+/* ✅ SERVICES DROPDOWN (GLASS + DEPTH) */
 .services{
   max-height:220px;
   overflow:auto;
-  border-radius:12px;
+  border-radius:14px;
   padding:10px;
   margin-top:10px;
-  background:#fff;
+
+  background:rgba(255,255,255,0.9);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,0.05);
   border:1px solid #e2e8f0;
 }
 
@@ -67,15 +80,15 @@ h1{
   align-items:center;
   justify-content:space-between;
   padding:10px;
-  border-radius:8px;
+  border-radius:10px;
   cursor:pointer;
-  transition:.2s;
-  color:var(--text);
+  transition:.25s;
 }
 
 /* hover */
 .services label:hover{
-  background:#f1f5f9;
+  background:#eff6ff;
+  transform:translateX(3px);
 }
 
 /* checkbox */
@@ -85,7 +98,7 @@ h1{
 
 /* selected */
 .services label:has(input:checked){
-  background:#dbeafe;
+  background:linear-gradient(135deg,#dbeafe,#bfdbfe);
   font-weight:600;
 }
 
@@ -93,11 +106,10 @@ h1{
 input[type="text"], select{
   width:100%;
   padding:12px;
-  border-radius:10px;
+  border-radius:12px;
   border:1px solid #e2e8f0;
   margin-top:10px;
   background:#fff;
-  color:var(--text);
 }
 
 /* TEXTAREA */
@@ -106,17 +118,36 @@ textarea{
   height:140px;
   margin-top:8px;
   padding:14px;
-  border-radius:12px;
+  border-radius:14px;
   border:1px solid #e2e8f0;
   background:#fff;
-  color:var(--text);
 }
 
-/* 🎯 CTA BUTTON (GREEN = CONVERSION) */
-button{
+/* 🎤 SPEAK BUTTON (BLUE LIKE WEBSITES) */
+button[type="button"]{
   width:100%;
   border:none;
   border-radius:14px;
+  padding:14px;
+  font-size:15px;
+  font-weight:600;
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
+  color:#fff;
+  cursor:pointer;
+  margin-top:10px;
+  transition:.2s;
+}
+
+button[type="button"]:hover{
+  box-shadow:0 6px 18px rgba(37,99,235,0.4);
+  transform:translateY(-1px);
+}
+
+/* 🎯 GENERATE BUTTON (GREEN CTA) */
+button[type="submit"]{
+  width:100%;
+  border:none;
+  border-radius:16px;
   padding:14px;
   font-size:16px;
   font-weight:600;
@@ -124,23 +155,23 @@ button{
   color:#fff;
   cursor:pointer;
   margin-top:8px;
-  transition:.2s;
+  transition:.25s;
 }
 
-button:hover{
-  transform:translateY(-1px);
-  box-shadow:0 6px 15px rgba(0,0,0,0.15);
+button[type="submit"]:hover{
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 10px 25px rgba(34,197,94,0.4);
 }
 
 .note{
   font-size:12px;
-  color:var(--muted);
+  color:#e2e8f0;
 }
 
 .footer{
   text-align:center;
   font-size:12px;
-  color:var(--muted);
+  color:#e2e8f0;
   margin-top:16px;
 }
 </style>
