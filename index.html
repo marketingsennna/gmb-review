@@ -283,14 +283,17 @@ let token = localStorage.getItem("reviewToken") || "";
 
 /* 🔥 TOKEN INIT */
 async function initToken(){
+  let token = localStorage.getItem("reviewToken") || "";
+
   if(!token){
     const res = await fetch("https://marketingsennna.onrender.com/get-token");
     const data = await res.json();
-    token = data.token;
 
+    token = data.token;
     localStorage.setItem("reviewToken", token);
   }
 }
+
 initToken();
 
 /* 🔥 REFRESH CONTROL */
@@ -418,20 +421,20 @@ if(rating<=3){
 }
 
 /* 🔥 API CALL */
-const res=await fetch("https://marketingsennna.onrender.com/generate",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-services,
-location,
-input,
-token,
-source
-})
-})
+const res = await fetch("https://marketingsennna.onrender.com/generate",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({
+    services,
+    location,
+    input,
+    token,
+    source
+  })
 });
 
-const data=await res.json();
+/* ✅ FIXED (inside function) */
+const data = await res.json();
 
 /* 🔥 ALREADY GENERATED */
 if(data.already){
@@ -480,6 +483,9 @@ window.addEventListener("load", ()=>{
     disableUI();
   }
 });
+
+window.startListening = startListening;
+  
 </script>
 
 </body>
