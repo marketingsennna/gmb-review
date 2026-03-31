@@ -254,12 +254,12 @@ button[type="submit"]:hover{
 </div>
 
 <div class="section">
-<button type="button">🎤 Speak</button>
+<button type="button" onclick="startListening()">🎤 Speak</button>
 <p class="note">Speak your experience</p>
 </div>
 
 <div class="section">
-<textarea placeholder="Write your experience..."></textarea>
+<textarea id="inputText" placeholder="Write your experience..."></textarea>
 </div>
 
 <div class="section">
@@ -268,7 +268,7 @@ button[type="submit"]:hover{
 
 </form>
 
-<textarea placeholder="Generated review"></textarea>
+<textarea id="output" placeholder="Generated review"></textarea>
 
 <p class="footer">Your feedback helps others make better decisions</p>
 
