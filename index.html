@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
+<head>
 <meta charset="UTF-8">
 <title>Review Generator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  
-  
-  <style>
+<style>
 :root{
   --bg:#020617;
   --card:rgba(255,255,255,0.05);
@@ -44,13 +40,13 @@ body{
 /* TITLE */
 h2{
   text-align:center;
-  margin-bottom:20px;
+  margin-bottom:22px;
   font-size:20px;
 }
 
 /* SECTION */
 .section{
-  margin-bottom:16px;
+  margin-bottom:18px;
 }
 
 /* LABEL */
@@ -61,69 +57,62 @@ h2{
   display:block;
 }
 
-/* 🔥 SERVICES FIXED PERFECTLY */
-
-.section{
-  margin-bottom:22px;
-}
-
-.section label{
-  font-weight:600;
-  font-size:14px;
-}
-
-.note{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:4px;
-}
-
+/* 🔥 SERVICES (FIXED PERFECT) */
 .services{
   border:1px solid var(--border);
   border-radius:12px;
-  padding:14px;
-  max-height:260px;
-  overflow:auto;
-  margin-top:10px;
+  padding:12px;
+  max-height:200px;
+  overflow-y:auto;
 }
 
 .services label{
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:6px 0;
+  justify-content:space-between; /* 🔥 key fix */
   font-size:14px;
+  padding:6px 4px;
   cursor:pointer;
 }
 
+/* TEXT */
+.services label span{
+  flex:1;
+}
+
+/* CHECKBOX RIGHT */
 .services input{
+  margin-left:10px;
   accent-color:var(--primary);
 }
 
-input[type="text"]{
+/* INPUTS (ALL SAME SIZE 🔥) */
+input,select,textarea{
   width:100%;
-  padding:12px 14px;
-  border-radius:10px;
+  padding:12px;
+  border-radius:12px;
   border:1px solid var(--border);
-  margin-top:10px;
+  background:rgba(255,255,255,0.04);
+  color:white;
   font-size:14px;
+  box-sizing:border-box;
+  margin-top:6px;
 }
 
-input[type="text"]:focus{
-  outline:none;
-  border-color:var(--primary);
+/* DROPDOWN FIX */
+select option{
+  color:black;
 }
 
 /* TEXTAREA */
 textarea{
-  min-height:100px;
-  margin-top:10px;
+  min-height:110px;
 }
 
-/* BUTTONS */
+/* BUTTON */
 button{
   width:100%;
-  padding:12px;
+  padding:13px;
   border:none;
   border-radius:12px;
   font-weight:600;
@@ -143,7 +132,7 @@ button{
   color:#020617;
 }
 
-/* HOVER EFFECT */
+/* HOVER */
 button:hover{
   transform:translateY(-1px);
 }
