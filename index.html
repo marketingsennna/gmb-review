@@ -288,6 +288,26 @@ let isListening = false;
 
 function startListening(){
 
+  // 🔥 SAME VALIDATION (mic click pe bhi)
+  const services = [...document.querySelectorAll('input[name="services"]:checked')];
+  const rating = document.getElementById("rating").value;
+  const location = document.getElementById("location").value;
+
+  if(!services.length){
+    alert("Please select at least one service");
+    return;
+  }
+
+  if(!rating){
+    alert("Please select rating");
+    return;
+  }
+
+  if(!location){
+    alert("Please enter location");
+    return;
+  }
+
   if(isListening){
     recognition.stop();
     isListening = false;
@@ -297,8 +317,11 @@ function startListening(){
 
   recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
-  recognition.lang = "en-IN";
-  recognition.continuous = true;       // 🔥 keeps listening
+  // 🔥 AUTO LANGUAGE (VERY IMPORTANT)
+  recognition.lang = "hi-IN"; 
+  // 👉 better for Hindi + Hinglish + mix
+
+  recognition.continuous = true;
   recognition.interimResults = true;
 
   let finalTranscript = "";
@@ -326,12 +349,15 @@ function startListening(){
       finalTranscript + interim;
   };
 
+  // 🔥 AUTO RESTART IF STOPPED
   recognition.onend = function(){
-    isListening = false;
-    document.getElementById("micBtn").innerText = "🎤 Start Speaking";
+    if(isListening){
+      recognition.start(); // 🔥 restart automatically
+    } else {
+      document.getElementById("micBtn").innerText = "🎤 Start Speaking";
+    }
   };
 }
-
 /* 🔥 FORM SUBMIT */
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
