@@ -7,69 +7,58 @@
 
 <style>
 :root{
-  --primary:#6366f1;
-  --accent:#ec4899;
-  --neon:#06b6d4;
-  --card:rgba(255,255,255,0.15);
+  --primary:#2563eb;   /* trust blue */
+  --secondary:#0ea5e9; /* light blue */
+  --cta:#16a34a;       /* green CTA */
+  --bg:#f1f5f9;
   --text:#0f172a;
-  --border:rgba(255,255,255,0.25);
+  --muted:#64748b;
 }
 
 *{box-sizing:border-box}
 
-/* 🌈 MARKETING GRADIENT BACKGROUND */
+/* 🌈 CLEAN PROFESSIONAL GRADIENT */
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-  background:linear-gradient(-45deg,#ff6ec4,#7873f5,#4facfe,#43e97b);
-  background-size:400% 400%;
-  animation:gradientBG 12s ease infinite;
+  background:linear-gradient(135deg,#e0f2fe,#eef2ff,#f8fafc);
   margin:0;
   padding:20px;
   color:var(--text);
 }
 
-@keyframes gradientBG{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-/* 💎 GLASS CONTAINER */
+/* CONTAINER */
 .container{
   max-width:620px;
   margin:auto;
-  background:rgba(255,255,255,0.2);
-  backdrop-filter:blur(18px);
-  border-radius:22px;
-  padding:26px;
-  box-shadow:0 15px 50px rgba(0,0,0,.15);
-  border:1px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(12px);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 h1{
   text-align:center;
-  color:#fff;
+  color:var(--text);
 }
 
 .sub{
   text-align:center;
-  color:#f1f5f9;
+  color:var(--muted);
   margin-bottom:20px;
 }
 
 .section{margin-bottom:18px}
 
-/* ✨ GLASS DROPDOWN */
+/* ✅ SERVICES DROPDOWN */
 .services{
-  max-height:230px;
+  max-height:220px;
   overflow:auto;
-  border-radius:14px;
+  border-radius:12px;
   padding:10px;
   margin-top:10px;
-
-  background:rgba(255,255,255,0.2);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.3);
+  background:#fff;
+  border:1px solid #e2e8f0;
 }
 
 /* rows */
@@ -78,43 +67,37 @@ h1{
   align-items:center;
   justify-content:space-between;
   padding:10px;
-  border-radius:10px;
+  border-radius:8px;
   cursor:pointer;
-  transition:.25s;
-  color:#fff;
+  transition:.2s;
+  color:var(--text);
 }
 
-/* hover glow */
+/* hover */
 .services label:hover{
-  background:rgba(255,255,255,0.2);
-  transform:scale(1.02);
+  background:#f1f5f9;
 }
 
 /* checkbox */
 .services input{
-  accent-color:#fff;
+  accent-color:var(--primary);
 }
 
 /* selected */
 .services label:has(input:checked){
-  background:linear-gradient(135deg,#6366f1,#ec4899);
-  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  background:#dbeafe;
+  font-weight:600;
 }
 
 /* INPUT */
 input[type="text"], select{
   width:100%;
   padding:12px;
-  border-radius:12px;
-  border:none;
+  border-radius:10px;
+  border:1px solid #e2e8f0;
   margin-top:10px;
-  background:rgba(255,255,255,0.2);
-  backdrop-filter:blur(10px);
-  color:#fff;
-}
-
-input::placeholder{
-  color:#e2e8f0;
+  background:#fff;
+  color:var(--text);
 }
 
 /* TEXTAREA */
@@ -123,43 +106,41 @@ textarea{
   height:140px;
   margin-top:8px;
   padding:14px;
-  border-radius:14px;
-  border:none;
-  background:rgba(255,255,255,0.2);
-  backdrop-filter:blur(10px);
-  color:#fff;
+  border-radius:12px;
+  border:1px solid #e2e8f0;
+  background:#fff;
+  color:var(--text);
 }
 
-/* 🚀 CTA BUTTON */
+/* 🎯 CTA BUTTON (GREEN = CONVERSION) */
 button{
   width:100%;
   border:none;
-  border-radius:18px;
+  border-radius:14px;
   padding:14px;
   font-size:16px;
   font-weight:600;
-  background:linear-gradient(135deg,#ff6ec4,#ec4899,#6366f1);
+  background:linear-gradient(135deg,#22c55e,#16a34a);
   color:#fff;
   cursor:pointer;
   margin-top:8px;
-  transition:.3s;
+  transition:.2s;
 }
 
-/* glow hover */
 button:hover{
-  transform:translateY(-2px) scale(1.02);
-  box-shadow:0 10px 30px rgba(255,105,180,0.4);
+  transform:translateY(-1px);
+  box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
 
 .note{
   font-size:12px;
-  color:#e2e8f0;
+  color:var(--muted);
 }
 
 .footer{
   text-align:center;
   font-size:12px;
-  color:#e2e8f0;
+  color:var(--muted);
   margin-top:16px;
 }
 </style>
@@ -169,47 +150,47 @@ button:hover{
 
 <div class="container">
 
-<h1>✨ Share Your Experience</h1>
+<h1>Share Your Experience</h1>
 <div class="sub">Your review will be generated automatically</div>
 
 <form id="form">
 
 <div class="section">
-<label style="color:white;">Select services</label>
+<label>Select services</label>
 <div class="note">You can select multiple services</div>
 
 <div class="services">
 
-<label>Facebook & Instagram Ads <input type="checkbox" name="services" value="Facebook & Instagram Ads"></label>
-<label>Lead Generation <input type="checkbox" name="services" value="Lead Generation"></label>
-<label>Social Media Marketing & Management <input type="checkbox" name="services" value="Social Media Marketing & Management"></label>
-<label>Digital Marketing <input type="checkbox" name="services" value="Digital Marketing"></label>
-<label>Google My Business Profile Creation & Optimization <input type="checkbox" name="services" value="Google My Business Profile Creation & Optimization"></label>
-<label>GMB Call Verification <input type="checkbox" name="services" value="GMB Call Verification"></label>
-<label>GMB Suspension Removal <input type="checkbox" name="services" value="GMB Suspension Removal"></label>
-<label>GMB Management <input type="checkbox" name="services" value="GMB Management"></label>
-<label>Local SEO <input type="checkbox" name="services" value="Local SEO"></label>
-<label>Video Editing <input type="checkbox" name="services" value="Video Editing"></label>
-<label>Graphic Design <input type="checkbox" name="services" value="Graphic Design"></label>
-<label>WhatsApp Marketing <input type="checkbox" name="services" value="WhatsApp Marketing"></label>
-<label>NFC + QR Code Digital Visiting Card <input type="checkbox" name="services" value="NFC + QR Code Digital Visiting Card"></label>
-<label>Content Marketing & Writing <input type="checkbox" name="services" value="Content Marketing & Writing"></label>
-<label>SEO <input type="checkbox" name="services" value="SEO"></label>
-<label>GMB Ads <input type="checkbox" name="services" value="GMB Ads"></label>
-<label>Business Consulting <input type="checkbox" name="services" value="Business Consulting"></label>
-<label>AI Automation <input type="checkbox" name="services" value="AI Automation"></label>
-<label>Advertising & Branding <input type="checkbox" name="services" value="Advertising & Branding"></label>
-<label>Website Development & Design <input type="checkbox" name="services" value="Website Development & Design"></label>
-<label>Software Development <input type="checkbox" name="services" value="Software Development"></label>
-<label>Mobile App Development <input type="checkbox" name="services" value="Mobile App Development"></label>
-<label>CRM Development <input type="checkbox" name="services" value="CRM Development"></label>
-<label>Landing Page Development <input type="checkbox" name="services" value="Landing Page Development"></label>
+<label>Facebook & Instagram Ads <input type="checkbox"></label>
+<label>Lead Generation <input type="checkbox"></label>
+<label>Social Media Marketing & Management <input type="checkbox"></label>
+<label>Digital Marketing <input type="checkbox"></label>
+<label>Google My Business Profile Creation & Optimization <input type="checkbox"></label>
+<label>GMB Call Verification <input type="checkbox"></label>
+<label>GMB Suspension Removal <input type="checkbox"></label>
+<label>GMB Management <input type="checkbox"></label>
+<label>Local SEO <input type="checkbox"></label>
+<label>Video Editing <input type="checkbox"></label>
+<label>Graphic Design <input type="checkbox"></label>
+<label>WhatsApp Marketing <input type="checkbox"></label>
+<label>NFC + QR Code Digital Visiting Card <input type="checkbox"></label>
+<label>Content Marketing & Writing <input type="checkbox"></label>
+<label>SEO <input type="checkbox"></label>
+<label>GMB Ads <input type="checkbox"></label>
+<label>Business Consulting <input type="checkbox"></label>
+<label>AI Automation <input type="checkbox"></label>
+<label>Advertising & Branding <input type="checkbox"></label>
+<label>Website Development & Design <input type="checkbox"></label>
+<label>Software Development <input type="checkbox"></label>
+<label>Mobile App Development <input type="checkbox"></label>
+<label>CRM Development <input type="checkbox"></label>
+<label>Landing Page Development <input type="checkbox"></label>
 
 </div>
 </div>
 
 <div class="section">
-<label style="color:white;">Select Rating</label>
+<label>Select Rating</label>
 <select id="rating">
 <option value="">Choose rating</option>
 <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
@@ -221,8 +202,8 @@ button:hover{
 </div>
 
 <div class="section">
-<label style="color:white;">Location</label>
-<input type="text" id="location" placeholder="e.g. Vesu, Surat">
+<label>Location</label>
+<input type="text" placeholder="e.g. Vesu, Surat">
 </div>
 
 <div class="section">
@@ -231,16 +212,16 @@ button:hover{
 </div>
 
 <div class="section">
-<textarea id="inputText" placeholder="Write your experience..."></textarea>
+<textarea placeholder="Write your experience..."></textarea>
 </div>
 
 <div class="section">
-<button type="submit">🚀 Generate Review</button>
+<button type="submit">Generate Review</button>
 </div>
 
 </form>
 
-<textarea id="output" placeholder="Generated review"></textarea>
+<textarea placeholder="Generated review"></textarea>
 
 <p class="footer">Your feedback helps others make better decisions</p>
 
