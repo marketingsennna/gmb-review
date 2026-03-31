@@ -208,30 +208,30 @@ button[type="submit"]:hover{
 
 <div class="services">
 
-<label>Facebook & Instagram Ads <input type="checkbox"></label>
-<label>Lead Generation <input type="checkbox"></label>
-<label>Social Media Marketing & Management <input type="checkbox"></label>
-<label>Digital Marketing <input type="checkbox"></label>
-<label>Google My Business Profile Creation & Optimization <input type="checkbox"></label>
-<label>GMB Call Verification <input type="checkbox"></label>
-<label>GMB Suspension Removal <input type="checkbox"></label>
-<label>GMB Management <input type="checkbox"></label>
-<label>Local SEO <input type="checkbox"></label>
-<label>Video Editing <input type="checkbox"></label>
-<label>Graphic Design <input type="checkbox"></label>
-<label>WhatsApp Marketing <input type="checkbox"></label>
-<label>NFC + QR Code Digital Visiting Card <input type="checkbox"></label>
-<label>Content Marketing & Writing <input type="checkbox"></label>
-<label>SEO <input type="checkbox"></label>
-<label>GMB Ads <input type="checkbox"></label>
-<label>Business Consulting <input type="checkbox"></label>
-<label>AI Automation <input type="checkbox"></label>
-<label>Advertising & Branding <input type="checkbox"></label>
-<label>Website Development & Design <input type="checkbox"></label>
-<label>Software Development <input type="checkbox"></label>
-<label>Mobile App Development <input type="checkbox"></label>
-<label>CRM Development <input type="checkbox"></label>
-<label>Landing Page Development <input type="checkbox"></label>
+<label>Facebook & Instagram Ads <input type="checkbox" name="services" value="Facebook & Instagram Ads"></label>
+<label>Lead Generation <input type="checkbox" name="services" value="Lead Generation"></label>
+<label>Social Media Marketing & Management <input type="checkbox" name="services" value="Social Media Marketing & Management"></label>
+<label>Digital Marketing <input type="checkbox" name="services" value="Digital Marketing"></label>
+<label>Google My Business Profile Creation & Optimization <input type="checkbox" name="services" value="Google My Business Profile Creation & Optimization"></label>
+<label>GMB Call Verification <input type="checkbox" name="services" value="GMB Call Verification"></label>
+<label>GMB Suspension Removal <input type="checkbox" name="services" value="GMB Suspension Removal"></label>
+<label>GMB Management <input type="checkbox" name="services" value="GMB Management"></label>
+<label>Local SEO <input type="checkbox" name="services" value="Local SEO"></label>
+<label>Video Editing <input type="checkbox" name="services" value="Video Editing"></label>
+<label>Graphic Design <input type="checkbox" name="services" value="Graphic Design"></label>
+<label>WhatsApp Marketing <input type="checkbox" name="services" value="WhatsApp Marketing"></label>
+<label>NFC + QR Code Digital Visiting Card <input type="checkbox" name="services" value="NFC + QR Code Digital Visiting Card"></label>
+<label>Content Marketing & Writing <input type="checkbox" name="services" value="Content Marketing & Writing"></label>
+<label>SEO <input type="checkbox" name="services" value="SEO"></label>
+<label>GMB Ads <input type="checkbox" name="services" value="GMB Ads"></label>
+<label>Business Consulting <input type="checkbox" name="services" value="Business Consulting"></label>
+<label>AI Automation <input type="checkbox" name="services" value="AI Automation"></label>
+<label>Advertising & Branding <input type="checkbox" name="services" value="Advertising & Branding"></label>
+<label>Website Development & Design <input type="checkbox" name="services" value="Website Development & Design"></label>
+<label>Software Development <input type="checkbox" name="services" value="Software Development"></label>
+<label>Mobile App Development <input type="checkbox" name="services" value="Mobile App Development"></label>
+<label>CRM Development <input type="checkbox" name="services" value="CRM Development"></label>
+<label>Landing Page Development <input type="checkbox" name="services" value="Landing Page Development"></label>
 
 </div>
 </div>
@@ -250,7 +250,7 @@ button[type="submit"]:hover{
 
 <div class="section">
 <label>Location</label>
-<input type="text" placeholder="e.g. Vesu, Surat">
+<input type="text" id="location" placeholder="e.g. Vesu, Surat">
 </div>
 
 <div class="section">
@@ -275,7 +275,6 @@ button[type="submit"]:hover{
 </div>
 
 <script>
-/* 🔥 SAME JS (UNCHANGED) */
 let token="";
 
 fetch("https://marketingsennna.onrender.com/get-token")
@@ -293,6 +292,7 @@ function startListening(){
   }
 
   recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
   recognition.lang = "en-IN";
   recognition.continuous = true;
   recognition.interimResults = true;
@@ -336,14 +336,30 @@ const rating=document.getElementById("rating").value;
 const location=document.getElementById("location").value;
 const input=document.getElementById("inputText").value;
 
-if(!services.length || !rating || !location || !input){
-alert("Fill all fields");
-return;
+/* 🔥 FIXED VALIDATION */
+if(!services.length){
+  alert("Please select at least one service");
+  return;
+}
+
+if(!rating){
+  alert("Please select rating");
+  return;
+}
+
+if(!location){
+  alert("Please enter location");
+  return;
+}
+
+if(!input){
+  alert("Please speak or write your experience");
+  return;
 }
 
 if(rating<=3){
-alert("Thanks for feedback 🙏");
-return;
+  alert("Thanks for feedback 🙏");
+  return;
 }
 
 const res=await fetch("https://marketingsennna.onrender.com/generate",{
@@ -359,11 +375,9 @@ token
 
 const data=await res.json();
 
-const output=data.review;
+document.getElementById("output").value=data.review;
 
-document.getElementById("output").value=output;
-
-navigator.clipboard.writeText(output);
+navigator.clipboard.writeText(data.review);
 
 setTimeout(()=>{
 window.open("https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ","_blank");
