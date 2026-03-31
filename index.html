@@ -277,6 +277,8 @@ button[type="submit"]:hover{
 </div>
 
 <script>
+const source = localStorage.getItem("source") || "direct";
+  
 let token = localStorage.getItem("reviewToken") || "";
 
 /* 🔥 TOKEN INIT */
@@ -423,7 +425,9 @@ body:JSON.stringify({
 services,
 location,
 input,
-token
+token,
+source
+})
 })
 });
 
