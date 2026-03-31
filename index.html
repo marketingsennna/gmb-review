@@ -70,22 +70,20 @@ h2{
 .services label{
   display:flex;
   align-items:center;   /* 🔥 center alignment */
-  justify-content:space-between;
+  gap:10px; 
   font-size:13px;
   padding:6px;
   cursor:pointer;
 }
 
-/* ✅ TEXT FIX */
+  /* 🔥 TEXT */
 .services label span{
   flex:1;
-  text-align:left;
-  white-space:normal;   /* 🔥 IMPORTANT FIX */
 }
 
-  .services input{
-  order:2; /* 🔥 checkbox right side */
-  margin-top:3px;
+/* 🔥 CHECKBOX RIGHT ALIGN */
+.services input{
+  margin-left:auto; /* 🔥 MAGIC FIX */
 }
 
 .services label:hover{
