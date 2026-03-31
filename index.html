@@ -277,18 +277,44 @@ button[type="submit"]:hover{
 </div>
 
 <script>
-let token="";
+let token = localStorage.getItem("reviewToken") || "";
 
-fetch("https://marketingsennna.onrender.com/get-token")
-.then(res=>res.json())
-.then(data=>token=data.token);
+/* 🔥 TOKEN INIT */
+async function initToken(){
+  if(!token){
+    const res = await fetch("https://marketingsennna.onrender.com/get-token");
+    const data = await res.json();
+    token = data.token;
+
+    localStorage.setItem("reviewToken", token);
+  }
+}
+initToken();
+
+/* 🔥 REFRESH CONTROL */
+let refreshCount = parseInt(localStorage.getItem("refreshCount") || "0");
+refreshCount++;
+localStorage.setItem("refreshCount", refreshCount);
+
+if(refreshCount > 2){
+  alert("Session expired. Please scan QR or request link again.");
+  localStorage.clear();
+  location.reload();
+}
 
 let recognition;
 let isListening = false;
 
+function disableUI(){
+  document.getElementById("micBtn").disabled = true;
+  document.getElementById("generateBtn").disabled = true;
+
+  document.getElementById("micBtn").style.opacity = "0.5";
+  document.getElementById("generateBtn").style.opacity = "0.5";
+}
+
 function startListening(){
 
-  // 🔥 SAME VALIDATION (mic click pe bhi)
   const services = [...document.querySelectorAll('input[name="services"]:checked')];
   const rating = document.getElementById("rating").value;
   const location = document.getElementById("location").value;
@@ -317,10 +343,7 @@ function startListening(){
 
   recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
-  // 🔥 AUTO LANGUAGE (VERY IMPORTANT)
-  recognition.lang = "hi-IN"; 
-  // 👉 better for Hindi + Hinglish + mix
-
+  recognition.lang = "hi-IN";
   recognition.continuous = true;
   recognition.interimResults = true;
 
@@ -349,15 +372,15 @@ function startListening(){
       finalTranscript + interim;
   };
 
-  // 🔥 AUTO RESTART IF STOPPED
   recognition.onend = function(){
     if(isListening){
-      recognition.start(); // 🔥 restart automatically
+      recognition.start();
     } else {
       document.getElementById("micBtn").innerText = "🎤 Start Speaking";
     }
   };
 }
+
 /* 🔥 FORM SUBMIT */
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
@@ -367,7 +390,6 @@ const rating=document.getElementById("rating").value;
 const location=document.getElementById("location").value;
 const input=document.getElementById("inputText").value;
 
-/* ✅ VALIDATION */
 if(!services.length){
   alert("Please select at least one service");
   return;
@@ -388,7 +410,6 @@ if(!input){
   return;
 }
 
-/* ⭐ LOW RATING → NO REDIRECT */
 if(rating<=3){
   alert("Thanks for your feedback 🙏");
   return;
@@ -408,17 +429,43 @@ token
 
 const data=await res.json();
 
-/* OUTPUT */
+/* 🔥 ALREADY GENERATED */
+if(data.already){
+  document.getElementById("output").value = data.review;
+
+  alert("You have already generated review for this QR");
+
+  disableUI();
+
+  return;
+}
+
+/* ✅ FIRST TIME SUCCESS */
 document.getElementById("output").value=data.review;
 
 /* COPY */
-navigator.clipboard.writeText(data.review);
+try{
+  navigator.clipboard.writeText(data.review);
+}catch{}
 
 /* OPEN GMB */
 setTimeout(()=>{
 window.open("https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ","_blank");
 },800);
 
+/* SAVE STATE */
+localStorage.setItem("reviewDone", "true");
+
+/* DISABLE UI */
+disableUI();
+
+});
+
+/* 🔥 PAGE LOAD CHECK */
+window.addEventListener("load", ()=>{
+  if(localStorage.getItem("reviewDone")){
+    disableUI();
+  }
 });
 </script>
 
