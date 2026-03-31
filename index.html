@@ -7,22 +7,22 @@
 
 <style>
 :root{
-  --primary:#2563eb;
-  --bg:#f8fafc;
-  --card:#ffffff;
+  --primary:#6366f1;
+  --accent:#ec4899;
+  --neon:#06b6d4;
+  --card:rgba(255,255,255,0.15);
   --text:#0f172a;
-  --muted:#64748b;
-  --border:#e5e7eb;
+  --border:rgba(255,255,255,0.25);
 }
 
 *{box-sizing:border-box}
 
-/* 🌈 ANIMATED GRADIENT BACKGROUND */
+/* 🌈 MARKETING GRADIENT BACKGROUND */
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-  background:linear-gradient(-45deg,#6366f1,#8b5cf6,#3b82f6,#06b6d4);
+  background:linear-gradient(-45deg,#ff6ec4,#7873f5,#4facfe,#43e97b);
   background-size:400% 400%;
-  animation:gradientBG 10s ease infinite;
+  animation:gradientBG 12s ease infinite;
   margin:0;
   padding:20px;
   color:var(--text);
@@ -34,69 +34,87 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* CONTAINER */
+/* 💎 GLASS CONTAINER */
 .container{
   max-width:620px;
   margin:auto;
-  background:rgba(255,255,255,0.95);
-  backdrop-filter:blur(10px);
-  border-radius:18px;
-  padding:24px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(18px);
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 15px 50px rgba(0,0,0,.15);
+  border:1px solid rgba(255,255,255,0.3);
 }
 
-h1{text-align:center}
-.sub{text-align:center;color:var(--muted);margin-bottom:20px}
+h1{
+  text-align:center;
+  color:#fff;
+}
 
-.section{margin-bottom:20px}
+.sub{
+  text-align:center;
+  color:#f1f5f9;
+  margin-bottom:20px;
+}
 
-/* ✅ DROPDOWN SERVICES */
+.section{margin-bottom:18px}
+
+/* ✨ GLASS DROPDOWN */
 .services{
-  border:1px solid var(--border);
-  border-radius:12px;
-  max-height:220px;
-  overflow-y:auto;
-  margin-top:10px;
-  background:#fff;
+  max-height:230px;
+  overflow:auto;
+  border-radius:14px;
   padding:10px;
+  margin-top:10px;
+
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.3);
 }
 
-/* each row */
+/* rows */
 .services label{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:8px 6px;
-  font-size:14px;
+  padding:10px;
+  border-radius:10px;
   cursor:pointer;
-  border-radius:8px;
-  transition:.2s;
+  transition:.25s;
+  color:#fff;
 }
 
-/* hover */
+/* hover glow */
 .services label:hover{
-  background:#f1f5f9;
+  background:rgba(255,255,255,0.2);
+  transform:scale(1.02);
 }
 
-/* checkbox right */
+/* checkbox */
 .services input{
-  margin-left:10px;
-  accent-color:var(--primary);
+  accent-color:#fff;
 }
 
 /* selected */
 .services label:has(input:checked){
-  background:#e0ecff;
-  font-weight:600;
+  background:linear-gradient(135deg,#6366f1,#ec4899);
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
 }
 
 /* INPUT */
 input[type="text"], select{
   width:100%;
   padding:12px;
-  border-radius:10px;
-  border:1px solid var(--border);
+  border-radius:12px;
+  border:none;
   margin-top:10px;
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(10px);
+  color:#fff;
+}
+
+input::placeholder{
+  color:#e2e8f0;
 }
 
 /* TEXTAREA */
@@ -105,34 +123,45 @@ textarea{
   height:140px;
   margin-top:8px;
   padding:14px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:#f9fafb;
+  border-radius:14px;
+  border:none;
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(10px);
+  color:#fff;
 }
 
-/* BUTTON */
+/* 🚀 CTA BUTTON */
 button{
   width:100%;
   border:none;
-  border-radius:14px;
+  border-radius:18px;
   padding:14px;
   font-size:16px;
   font-weight:600;
-  background:linear-gradient(135deg,#22c55e,#16a34a);
+  background:linear-gradient(135deg,#ff6ec4,#ec4899,#6366f1);
   color:#fff;
   cursor:pointer;
   margin-top:8px;
-  transition:.2s;
+  transition:.3s;
 }
 
+/* glow hover */
 button:hover{
-  transform:translateY(-1px);
-  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 10px 30px rgba(255,105,180,0.4);
 }
 
-.note{font-size:12px;color:var(--muted)}
-.footer{text-align:center;font-size:12px;color:var(--muted);margin-top:16px}
+.note{
+  font-size:12px;
+  color:#e2e8f0;
+}
 
+.footer{
+  text-align:center;
+  font-size:12px;
+  color:#e2e8f0;
+  margin-top:16px;
+}
 </style>
 </head>
 
@@ -140,13 +169,13 @@ button:hover{
 
 <div class="container">
 
-<h1>Share Your Experience</h1>
+<h1>✨ Share Your Experience</h1>
 <div class="sub">Your review will be generated automatically</div>
 
 <form id="form">
 
 <div class="section">
-<label>Select services</label>
+<label style="color:white;">Select services</label>
 <div class="note">You can select multiple services</div>
 
 <div class="services">
@@ -180,7 +209,7 @@ button:hover{
 </div>
 
 <div class="section">
-<label>Select Rating</label>
+<label style="color:white;">Select Rating</label>
 <select id="rating">
 <option value="">Choose rating</option>
 <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
@@ -192,7 +221,7 @@ button:hover{
 </div>
 
 <div class="section">
-<label>Location</label>
+<label style="color:white;">Location</label>
 <input type="text" id="location" placeholder="e.g. Vesu, Surat">
 </div>
 
@@ -206,7 +235,7 @@ button:hover{
 </div>
 
 <div class="section">
-<button type="submit">Generate Review</button>
+<button type="submit">🚀 Generate Review</button>
 </div>
 
 </form>
