@@ -190,6 +190,47 @@ button[type="submit"]:hover{
   color:#64748b;
   margin-top:16px;
 }
+
+  /* 🔥 COPY BUTTON PREMIUM STYLE */
+.copy-btn{
+  margin-top:14px; /* textarea से gap */
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+
+  /* 🔥 DARK BLUE + RED GRADIENT */
+  background:linear-gradient(135deg,#0f172a,#1e3a8a,#dc2626);
+  color:#fff;
+
+  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  transition:all 0.25s ease;
+}
+
+/* 🔥 HOVER EFFECT */
+.copy-btn:hover{
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* 🔥 ACTIVE CLICK */
+.copy-btn:active{
+  transform:scale(0.97);
+}
+
+/* 🔥 ATTENTION GLOW */
+.copy-btn{
+  animation:glowPulse 2s infinite;
+}
+
+@keyframes glowPulse{
+  0%{ box-shadow:0 0 0 rgba(220,38,38,0.3); }
+  50%{ box-shadow:0 0 12px rgba(220,38,38,0.6); }
+  100%{ box-shadow:0 0 0 rgba(220,38,38,0.3); }
+}
 </style>
 </head>
 
@@ -272,7 +313,7 @@ button[type="submit"]:hover{
 
 <textarea id="output" placeholder="Generated review"></textarea>
   
-<button onclick="copyAgain()">Copy Review</button>
+<button class="copy-btn" onclick="copyAgain()">Copy Review</button>
 
 <p class="footer">Your feedback helps others make better decisions</p>
 
