@@ -254,7 +254,9 @@ button[type="submit"]:hover{
 </div>
 
 <div class="section">
-<button type="button" onclick="startListening()">🎤 Speak</button>
+<button type="button" id="micBtn" onclick="startListening()">
+🎤 Start Speaking
+</button>
 <p class="note">Speak your experience</p>
 </div>
 
@@ -285,26 +287,28 @@ let recognition;
 let isListening = false;
 
 function startListening(){
+
   if(isListening){
     recognition.stop();
     isListening = false;
+    document.getElementById("micBtn").innerText = "🎤 Start Speaking";
     return;
   }
 
   recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
   recognition.lang = "en-IN";
-  recognition.continuous = true;
+  recognition.continuous = true;       // 🔥 keeps listening
   recognition.interimResults = true;
 
   let finalTranscript = "";
-  let silenceTimer;
 
   recognition.start();
   isListening = true;
 
+  document.getElementById("micBtn").innerText = "⏹ Stop Recording";
+
   recognition.onresult = function(event){
-    clearTimeout(silenceTimer);
 
     let interim = "";
 
@@ -320,14 +324,15 @@ function startListening(){
 
     document.getElementById("inputText").value =
       finalTranscript + interim;
+  };
 
-    silenceTimer = setTimeout(() => {
-      recognition.stop();
-      isListening = false;
-    }, 2000);
+  recognition.onend = function(){
+    isListening = false;
+    document.getElementById("micBtn").innerText = "🎤 Start Speaking";
   };
 }
 
+/* 🔥 FORM SUBMIT */
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
 
@@ -336,7 +341,7 @@ const rating=document.getElementById("rating").value;
 const location=document.getElementById("location").value;
 const input=document.getElementById("inputText").value;
 
-/* 🔥 FIXED VALIDATION */
+/* ✅ VALIDATION */
 if(!services.length){
   alert("Please select at least one service");
   return;
@@ -357,11 +362,13 @@ if(!input){
   return;
 }
 
+/* ⭐ LOW RATING → NO REDIRECT */
 if(rating<=3){
-  alert("Thanks for feedback 🙏");
+  alert("Thanks for your feedback 🙏");
   return;
 }
 
+/* 🔥 API CALL */
 const res=await fetch("https://marketingsennna.onrender.com/generate",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
@@ -375,10 +382,13 @@ token
 
 const data=await res.json();
 
+/* OUTPUT */
 document.getElementById("output").value=data.review;
 
+/* COPY */
 navigator.clipboard.writeText(data.review);
 
+/* OPEN GMB */
 setTimeout(()=>{
 window.open("https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ","_blank");
 },800);
