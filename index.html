@@ -271,6 +271,8 @@ button[type="submit"]:hover{
 </form>
 
 <textarea id="output" placeholder="Generated review"></textarea>
+  
+<button onclick="copyAgain()">Copy Review</button>
 
 <p class="footer">Your feedback helps others make better decisions</p>
 
@@ -487,16 +489,36 @@ disableUI();
 }); // FORM SUBMIT CLOSE
 
 /* 🔥 PAGE LOAD CHECK */
-window.addEventListener("load", ()=>{
+window.addEventListener("load", async ()=>{
   const saved = localStorage.getItem("savedReview");
 
   if(saved){
-    document.getElementById("output").value = saved;
+    const textarea = document.getElementById("output");
+    textarea.value = saved;
+
+    /* 🔥 AUTO SELECT TEXT */
+    textarea.focus();
+    textarea.select();
+
+    /* 🔥 TRY AUTO COPY (may fail silently) */
+    try{
+      await navigator.clipboard.writeText(saved);
+    }catch{
+      // ignore (browser block)
+    }
   }
 });
 
 /* 🔥 GLOBAL FUNCTION FIX */
 window.startListening = startListening;
+
+  function copyAgain(){
+  const text = document.getElementById("output").value;
+
+  navigator.clipboard.writeText(text);
+
+  alert("Copied again ✅");
+}
   
 </script>
 
