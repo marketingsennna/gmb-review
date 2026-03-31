@@ -8,8 +8,7 @@
 <style>
 :root{
   --primary:#2563eb;
-  --secondary:#7c3aed;
-  --bg:#f1f5f9;
+  --bg:#f8fafc;
   --card:#ffffff;
   --text:#0f172a;
   --muted:#64748b;
@@ -18,22 +17,32 @@
 
 *{box-sizing:border-box}
 
+/* 🌈 ANIMATED GRADIENT BACKGROUND */
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+  background:linear-gradient(-45deg,#6366f1,#8b5cf6,#3b82f6,#06b6d4);
+  background-size:400% 400%;
+  animation:gradientBG 10s ease infinite;
   margin:0;
   padding:20px;
   color:var(--text);
+}
+
+@keyframes gradientBG{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* CONTAINER */
 .container{
   max-width:620px;
   margin:auto;
-  background:var(--card);
-  border-radius:20px;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(10px);
+  border-radius:18px;
   padding:24px;
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
 }
 
 h1{text-align:center}
@@ -41,30 +50,32 @@ h1{text-align:center}
 
 .section{margin-bottom:20px}
 
-/* 🌈 SERVICES ULTRA UI */
+/* ✅ DROPDOWN SERVICES */
 .services{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  max-height:220px;
+  overflow-y:auto;
   margin-top:10px;
+  background:#fff;
+  padding:10px;
 }
 
+/* each row */
 .services label{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:12px;
-  border-radius:14px;
+  padding:8px 6px;
+  font-size:14px;
   cursor:pointer;
-  background:linear-gradient(135deg,#ffffff,#f1f5f9);
-  border:1px solid var(--border);
-  transition:.25s;
+  border-radius:8px;
+  transition:.2s;
 }
 
 /* hover */
 .services label:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 15px rgba(0,0,0,0.06);
+  background:#f1f5f9;
 }
 
 /* checkbox right */
@@ -73,19 +84,17 @@ h1{text-align:center}
   accent-color:var(--primary);
 }
 
-/* selected card */
+/* selected */
 .services label:has(input:checked){
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#fff;
-  border:none;
-  box-shadow:0 10px 25px rgba(37,99,235,0.3);
+  background:#e0ecff;
+  font-weight:600;
 }
 
 /* INPUT */
 input[type="text"], select{
   width:100%;
   padding:12px;
-  border-radius:12px;
+  border-radius:10px;
   border:1px solid var(--border);
   margin-top:10px;
 }
@@ -94,31 +103,31 @@ input[type="text"], select{
 textarea{
   width:100%;
   height:140px;
-  margin-top:8px; /* 🔥 reduced */
+  margin-top:8px;
   padding:14px;
-  border-radius:14px;
+  border-radius:12px;
   border:1px solid var(--border);
-  background:#f8fafc;
+  background:#f9fafb;
 }
 
 /* BUTTON */
 button{
   width:100%;
   border:none;
-  border-radius:16px;
+  border-radius:14px;
   padding:14px;
   font-size:16px;
   font-weight:600;
-  background:linear-gradient(135deg,#16a34a,#22c55e); /* 🔥 DIFFERENT COLOR */
+  background:linear-gradient(135deg,#22c55e,#16a34a);
   color:#fff;
   cursor:pointer;
-  margin-top:8px; /* 🔥 gap control */
+  margin-top:8px;
   transition:.2s;
 }
 
 button:hover{
   transform:translateY(-1px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
 }
 
 .note{font-size:12px;color:var(--muted)}
@@ -141,18 +150,32 @@ button:hover{
 <div class="note">You can select multiple services</div>
 
 <div class="services">
+
 <label>Facebook & Instagram Ads <input type="checkbox" name="services" value="Facebook & Instagram Ads"></label>
 <label>Lead Generation <input type="checkbox" name="services" value="Lead Generation"></label>
-<label>Social Media Marketing <input type="checkbox" name="services" value="Social Media Marketing"></label>
+<label>Social Media Marketing & Management <input type="checkbox" name="services" value="Social Media Marketing & Management"></label>
 <label>Digital Marketing <input type="checkbox" name="services" value="Digital Marketing"></label>
-<label>Google My Business <input type="checkbox" name="services" value="GMB"></label>
+<label>Google My Business Profile Creation & Optimization <input type="checkbox" name="services" value="Google My Business Profile Creation & Optimization"></label>
+<label>GMB Call Verification <input type="checkbox" name="services" value="GMB Call Verification"></label>
+<label>GMB Suspension Removal <input type="checkbox" name="services" value="GMB Suspension Removal"></label>
+<label>GMB Management <input type="checkbox" name="services" value="GMB Management"></label>
 <label>Local SEO <input type="checkbox" name="services" value="Local SEO"></label>
 <label>Video Editing <input type="checkbox" name="services" value="Video Editing"></label>
 <label>Graphic Design <input type="checkbox" name="services" value="Graphic Design"></label>
 <label>WhatsApp Marketing <input type="checkbox" name="services" value="WhatsApp Marketing"></label>
+<label>NFC + QR Code Digital Visiting Card <input type="checkbox" name="services" value="NFC + QR Code Digital Visiting Card"></label>
+<label>Content Marketing & Writing <input type="checkbox" name="services" value="Content Marketing & Writing"></label>
 <label>SEO <input type="checkbox" name="services" value="SEO"></label>
+<label>GMB Ads <input type="checkbox" name="services" value="GMB Ads"></label>
 <label>Business Consulting <input type="checkbox" name="services" value="Business Consulting"></label>
-<label>Website Development <input type="checkbox" name="services" value="Website Development"></label>
+<label>AI Automation <input type="checkbox" name="services" value="AI Automation"></label>
+<label>Advertising & Branding <input type="checkbox" name="services" value="Advertising & Branding"></label>
+<label>Website Development & Design <input type="checkbox" name="services" value="Website Development & Design"></label>
+<label>Software Development <input type="checkbox" name="services" value="Software Development"></label>
+<label>Mobile App Development <input type="checkbox" name="services" value="Mobile App Development"></label>
+<label>CRM Development <input type="checkbox" name="services" value="CRM Development"></label>
+<label>Landing Page Development <input type="checkbox" name="services" value="Landing Page Development"></label>
+
 </div>
 </div>
 
