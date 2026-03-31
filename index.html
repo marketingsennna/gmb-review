@@ -283,13 +283,11 @@ let token = localStorage.getItem("reviewToken") || "";
 
 /* 🔥 TOKEN INIT */
 async function initToken(){
-  let token = localStorage.getItem("reviewToken") || "";
-
   if(!token){
     const res = await fetch("https://marketingsennna.onrender.com/get-token");
     const data = await res.json();
 
-    token = data.token;
+    token = data.token; // 🔥 GLOBAL UPDATE
     localStorage.setItem("reviewToken", token);
   }
 }
@@ -457,11 +455,10 @@ if(data.already){
 /* ✅ FIRST TIME SUCCESS */
 document.getElementById("output").value=data.review;
 
-/* COPY */
+/* 🔥 AUTO COPY (NO POPUP) */
 try{
   await navigator.clipboard.writeText(data.review);
 }catch{
-  // fallback copy
   const temp = document.createElement("textarea");
   temp.value = data.review;
   document.body.appendChild(temp);
@@ -470,19 +467,13 @@ try{
   document.body.removeChild(temp);
 }
 
-/* 🔥 USER MESSAGE */
-alert("✅ Review copied!\n\n👉 Google review page open ho raha hai\n👉 Paste karke submit kare");
-
-/* 🔥 DIRECT GMB OPEN (NO BLANK TAB) */
+/* 🔥 DIRECT GMB OPEN */
 window.location.href = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ";
 
-/* SAVE STATE */
-localStorage.setItem("reviewDone", "true");
-
-/* DISABLE UI */
-disableUI();
-  
-});
+/* 🔥 REMOVE TOKEN AFTER SMALL DELAY */
+setTimeout(()=>{
+  localStorage.removeItem("reviewToken");
+}, 2000);
 
 /* 🔥 PAGE LOAD CHECK */
 window.addEventListener("load", ()=>{
