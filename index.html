@@ -89,6 +89,21 @@ h1{text-align:center}
   font-weight:600;
 }
 
+  /* spacing between each service */
+.services label{
+  margin-bottom:8px;   /* 🔥 gap between items */
+}
+
+/* last item extra gap avoid */
+.services label:last-child{
+  margin-bottom:0;
+}
+
+/* selected state me bhi spacing maintain */
+.services label:has(input:checked){
+  margin-bottom:8px;
+}
+
 /* 🔥 FIX WIDTH ISSUE (VERY IMPORTANT) */
 input[type="text"], 
 select, 
