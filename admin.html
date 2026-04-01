@@ -7,11 +7,27 @@
 
 <body style="font-family:sans-serif; padding:20px; background:#f5f5f5;">
 
+  <script>
+if(localStorage.getItem("adminAuth") !== "true"){
+  window.location.href = "admin-login.html";
+}
+</script>
+
+<h2>Review Analytics</h2>
+
 <h2 style="text-align:center;"> Marketing Sennna Review Analytics </h2>
 
 <div style="max-width:500px; margin:auto; background:white; padding:20px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
 
 <canvas id="chart"></canvas>
+
+  <h3>Generate Links</h3>
+
+<button onclick="generateLink('qr')">Generate QR Link</button>
+<button onclick="generateLink('nfc')">Generate NFC Link</button>
+<button onclick="generateLink('link')">Generate Normal Link</button>
+
+<p id="linkOutput"></p>
 
 <!-- 🔥 BUTTON SECTION -->
 <div style="margin-top:20px; text-align:center;">
@@ -62,9 +78,20 @@ new Chart(ctx, {
     }
   }
 });
-
+  
 });
 
+function generateLink(type){
+
+  const link = "https://marketing.github.io/gmb-review/?source=" + type;
+
+  document.getElementById("linkOutput").innerText = link;
+
+  navigator.clipboard.writeText(link);
+
+  alert("Link copied ✅");
+}
+  
 </script>
 
 </body>
