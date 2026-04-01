@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login</title>
+</head>
 
+<body style="font-family:sans-serif; text-align:center; padding:50px;">
+
+<h2>Admin Login</h2>
+
+<input id="user" placeholder="Username"><br><br>
+<input id="pass" type="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<script>
+async function login(){
+  const username = document.getElementById("user").value;
+  const password = document.getElementById("pass").value;
+
+  const res = await fetch("https://marketingsennna.onrender.com/admin-login",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({ username, password })
+  });
+
+  const data = await res.json();
+
+  if(data.success){
+    localStorage.setItem("adminAuth","true");
+    window.location.href = "admin.html";
+  }else{
+    alert("Wrong credentials");
+  }
+}
+</script>
+
+</body>
+</html>
