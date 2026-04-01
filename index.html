@@ -339,15 +339,28 @@ async function initToken(){
 initToken();
 
 /* 🔥 REFRESH CONTROL */
-let refreshCount = parseInt(localStorage.getItem("refreshCount") || "0");
-refreshCount++;
-localStorage.setItem("refreshCount", refreshCount);
+window.addEventListener("beforeunload", ()=>{
+  localStorage.setItem("isReload", "true");
+});
 
-if(refreshCount > 2){
-  alert("Session expired. Please scan QR or request link again.");
-  localStorage.clear();
-  location.reload();
-}
+window.addEventListener("load", ()=>{
+  const isReload = localStorage.getItem("isReload");
+
+  if(isReload){
+    let count = parseInt(localStorage.getItem("refreshCount") || "0");
+    count++;
+
+    localStorage.setItem("refreshCount", count);
+
+    if(count > 2){
+      alert("Session expired. Please scan QR again.");
+      localStorage.clear();
+      location.reload();
+    }
+  }
+
+  localStorage.removeItem("isReload");
+});
 
 let recognition;
 let isListening = false;
