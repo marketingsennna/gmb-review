@@ -21,13 +21,6 @@ if(localStorage.getItem("adminAuth") !== "true"){
 
 <canvas id="chart"></canvas>
 
-  <h3>Generate Links</h3>
-
-<button onclick="generateLink('qr')">Generate QR Link</button>
-<button onclick="generateLink('nfc')">Generate NFC Link</button>
-<button onclick="generateLink('link')">Generate Normal Link</button>
-
-<p id="linkOutput"></p>
 
 <!-- 🔥 BUTTON SECTION -->
 <div style="margin-top:20px; text-align:center;">
@@ -83,7 +76,13 @@ new Chart(ctx, {
 
 function generateLink(type){
 
-  const link = "https://marketingsennna.github.io/gmb-review/?source=" + type;
+  const base = "https://marketing.github.io/gmb-review/";
+
+  let link = "";
+
+  if(type === "qr") link = base + "qr.html";
+  if(type === "nfc") link = base + "nfc.html";
+  if(type === "link") link = base + "link.html";
 
   document.getElementById("linkOutput").innerText = link;
 
