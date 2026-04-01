@@ -321,7 +321,8 @@ button[type="submit"]:hover{
 </div>
 
 <script>
-const source = localStorage.getItem("source") || "direct";
+const params = new URLSearchParams(window.location.search);
+const source = params.get("source") || "link";
   
 let token = localStorage.getItem("reviewToken") || "";
 
