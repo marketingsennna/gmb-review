@@ -325,6 +325,8 @@ const source = localStorage.getItem("source") || "direct";
   
 let token = localStorage.getItem("reviewToken") || "";
 
+let tokenReady = false;
+
 /* 🔥 TOKEN INIT */
 async function initToken(){
   if(!token){
@@ -334,6 +336,7 @@ async function initToken(){
     token = data.token; // 🔥 GLOBAL UPDATE
     localStorage.setItem("reviewToken", token);
   }
+  tokenReady = true;
 }
 
 initToken();
@@ -451,6 +454,11 @@ function startListening(){
 /* 🔥 FORM SUBMIT */
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
+
+  if(!tokenReady){
+  alert("Please wait, loading...");
+  return;
+}
 
 const services = [...document.querySelectorAll('input[name="services"]:checked')].map(el => el.value);
 const rating=document.getElementById("rating").value;
