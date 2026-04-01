@@ -353,9 +353,9 @@ window.addEventListener("load", ()=>{
     localStorage.setItem("refreshCount", count);
 
     if(count > 2){
-      alert("Session expired. Please scan QR again.");
-      localStorage.clear();
-      location.reload();
+      alert("Session expired. Please scan QR or Tap NFC or Link again.");
+      /*localStorage.clear();*/
+      /*location.reload();*/
     }
   }
 
@@ -544,6 +544,11 @@ disableUI();
 /* 🔥 PAGE LOAD CHECK */
 window.addEventListener("load", async ()=>{
   const saved = localStorage.getItem("savedReview");
+
+  const alreadyDone = localStorage.getItem("savedReview");
+  if(alreadyDone){
+  disableUI(); // 🔥 form block
+  }
 
   if(saved){
     const textarea = document.getElementById("output");
