@@ -21,7 +21,12 @@ if(localStorage.getItem("adminAuth") !== "true"){
 
 <canvas id="chart"></canvas>
 
+  <button onclick="sendWhatsApp()">Send WhatsApp Report</button>
 
+<h3>Daily Report</h3>
+<canvas id="dailyChart"></canvas>
+
+  
 <!-- 🔥 BUTTON SECTION -->
 <div style="margin-top:20px; text-align:center;">
 
@@ -74,6 +79,27 @@ new Chart(ctx, {
   
 });
 
+  fetch("https://marketingsennna.onrender.com/daily-report")
+.then(res=>res.json())
+.then(data=>{
+  const labels = Object.keys(data);
+  const qr = labels.map(d => data[d].qr);
+  const nfc = labels.map(d => data[d].nfc);
+  const link = labels.map(d => data[d].link);
+
+  new Chart(document.getElementById("dailyChart"), {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        { label:"QR", data: qr },
+        { label:"NFC", data: nfc },
+        { label:"Link", data: link }
+      ]
+    }
+  });
+});
+
 function generateLink(type){
 
   const base = "https://marketingsennna.github.io/gmb-review/";
@@ -89,6 +115,11 @@ function generateLink(type){
   navigator.clipboard.writeText(link);
 
   alert("Link copied ✅");
+}
+
+function sendWhatsApp(){
+  const msg = "Check your review report:\nhttps://marketingsennna.onrender.com/report";
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg));
 }
   
 </script>
