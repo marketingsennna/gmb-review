@@ -20,9 +20,7 @@ if(localStorage.getItem("adminAuth") !== "true"){
 <div style="max-width:500px; margin:auto; background:white; padding:20px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
 
 <canvas id="chart"></canvas>
-
-  <button onclick="sendWhatsApp()">Send WhatsApp Report</button>
-
+ 
 <h3>Daily Report</h3>
 <canvas id="dailyChart"></canvas>
 
@@ -115,11 +113,6 @@ function generateLink(type){
   navigator.clipboard.writeText(link);
 
   alert("Link copied ✅");
-}
-
-function sendWhatsApp(){
-  const msg = "Check your review report:\nhttps://marketingsennna.onrender.com/report";
-  window.open("https://wa.me/?text=" + encodeURIComponent(msg));
 }
   
 </script>
