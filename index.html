@@ -321,10 +321,11 @@ button[type="submit"]:hover{
 </div>
 
 <script>
-const source = localStorage.getItem("source") || "direct";
-  
-let token = localStorage.getItem("reviewToken") || "";
 
+const params = new URLSearchParams(window.location.search);
+const source = params.get("src") || "direct";
+
+let token = localStorage.getItem("reviewToken") || "";
 let tokenReady = false;
 
 /* 🔥 TOKEN INIT */
