@@ -416,7 +416,6 @@ function startListening(){
 
   recognition.lang = "hi-IN";
 
-  // 🔥 LIVE + FIX
   recognition.continuous = true;
   recognition.interimResults = true;
 
@@ -429,21 +428,16 @@ function startListening(){
 
   recognition.onresult = function(event){
 
-    let interim = "";
+    let current = event.results[event.resultIndex];
+    let text = current[0].transcript;
 
-    for (let i = 0; i < event.results.length; i++) {
-      let text = event.results[i][0].transcript;
-
-      if (event.results[i].isFinal) {
-        finalTranscript += text + " ";
-      } else {
-        interim += text;
-      }
+    if(current.isFinal){
+      finalTranscript += text + " ";
     }
 
-    // 🔥 FINAL + LIVE COMBINE
+    // 🔥 only latest + final (NO DUPLICATE)
     document.getElementById("inputText").value =
-      finalTranscript + interim;
+      finalTranscript + (current.isFinal ? "" : text);
   };
 
   recognition.onend = function(){
