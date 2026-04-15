@@ -321,7 +321,8 @@ button[type="submit"]:hover{
 </div>
 
 <script>
-
+let retryCount = 0;
+  
 const params = new URLSearchParams(window.location.search);
 const source = params.get("src") || "direct";
 
@@ -521,6 +522,13 @@ const res = await fetch("https://marketingsennna.onrender.com/generate",{
 
 /* ✅ FIXED (inside function) */
 const data = await res.json();
+if(data.review.includes("Server busy") && retryCount < 1){
+  retryCount++;
+  alert("Retrying...");
+  
+  document.getElementById("form").dispatchEvent(new Event("submit"));
+  return;
+}
 
 localStorage.setItem("savedReview", data.review);
 
