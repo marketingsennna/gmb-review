@@ -383,7 +383,6 @@ function disableUI(){
     gen.style.opacity = "0.5";
   }
 }
-
 function startListening(){
 
   const services = [...document.querySelectorAll('input[name="services"]:checked')];
@@ -415,11 +414,18 @@ function startListening(){
   recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
   recognition.lang = "hi-IN";
-  recognition.continuous = true;
-  recognition.interimResults = true;
 
-  let finalTranscript = "";
-  let lastText = ""; // 🔥 duplicate check
+  // 🔥 COMMON SETTINGS
+  recognition.continuous = false;
+
+  // 🔥 ADD HERE (IMPORTANT)
+  const isMobile = /iPhone|Android/i.test(navigator.userAgent);
+
+  if(isMobile){
+    recognition.interimResults = false; // 📱 mobile → final only
+  }else{
+    recognition.interimResults = true;  // 💻 desktop → live typing
+  }
 
   recognition.start();
   isListening = true;
@@ -428,32 +434,18 @@ function startListening(){
 
   recognition.onresult = function(event){
 
-    let current = event.results[event.resultIndex];
-    let text = current[0].transcript.trim();
+    // 🔥 DESKTOP LIVE + MOBILE FINAL दोनों handle करेगा
+    const result = event.results[0][0].transcript;
 
-    // 🔥 SAME TEXT IGNORE
-    if(text === lastText){
-      return;
-    }
-    lastText = text;
-
-    if(current.isFinal){
-      finalTranscript += text + " ";
-    }
-
-    document.getElementById("inputText").value =
-      finalTranscript + (current.isFinal ? "" : text);
+    document.getElementById("inputText").value = result;
   };
 
   recognition.onend = function(){
-    if(isListening){
-      recognition.start();
-    } else {
-      document.getElementById("micBtn").innerText = "🎤 Start Speaking";
-    }
+    isListening = false;
+    document.getElementById("micBtn").innerText = "🎤 Start Speaking";
   };
 }
-
+  
 /* 🔥 FORM SUBMIT */
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
