@@ -415,10 +415,11 @@ function startListening(){
   recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
   recognition.lang = "hi-IN";
-  recognition.continuous = true;
-  recognition.interimResults = true;
 
-  let finalTranscript = "";
+  // 🔥 FIX START (duplicate रोकने के लिए)
+  recognition.continuous = false; 
+  recognition.interimResults = false;
+  // 🔥 FIX END
 
   recognition.start();
   isListening = true;
@@ -427,28 +428,17 @@ function startListening(){
 
   recognition.onresult = function(event){
 
-    let interim = "";
+    // 🔥 FIX START (single clean output)
+    const transcript = event.results[0][0].transcript;
 
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      let text = event.results[i][0].transcript;
+    document.getElementById("inputText").value = transcript;
+    // 🔥 FIX END
 
-      if (event.results[i].isFinal) {
-        finalTranscript += text + " ";
-      } else {
-        interim += text;
-      }
-    }
-
-    document.getElementById("inputText").value =
-      finalTranscript + interim;
   };
 
   recognition.onend = function(){
-    if(isListening){
-      recognition.start();
-    } else {
-      document.getElementById("micBtn").innerText = "🎤 Start Speaking";
-    }
+    isListening = false;
+    document.getElementById("micBtn").innerText = "🎤 Start Speaking";
   };
 }
 
