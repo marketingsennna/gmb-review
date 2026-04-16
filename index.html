@@ -428,7 +428,8 @@ function startListening(){
     recognition.interimResults = true; // 💻 live typing
   }
 
-  let finalTranscript = "";
+let finalTranscript = document.getElementById("inputText").value || "";
+let lastFinal = finalTranscript;
 
   recognition.start();
   isListening = true;
@@ -440,14 +441,17 @@ function startListening(){
     let interim = "";
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
-      let text = event.results[i][0].transcript;
+  let text = event.results[i][0].transcript;
 
-      if (event.results[i].isFinal) {
-        finalTranscript += text + " ";
-      } else {
-        interim += text;
-      }
+  if (event.results[i].isFinal) {
+    if(text !== lastFinal){
+      finalTranscript += text + " ";
+      lastFinal = text;
     }
+  } else {
+    interim += text;
+  }
+}
 
     document.getElementById("inputText").value =
       finalTranscript + interim;
