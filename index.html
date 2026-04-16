@@ -522,11 +522,12 @@ const res = await fetch("https://marketingsennna.onrender.com/generate",{
 
 /* ✅ FIXED (inside function) */
 const data = await res.json();
-if(data.review.includes("Server busy") && retryCount < 1){
-  retryCount++;
-  alert("Retrying...");
+if(data.review.includes("Please try again")){
+  alert("⚠️ Something went wrong. Please click Generate again.");
   
-  document.getElementById("form").dispatchEvent(new Event("submit"));
+  document.getElementById("generateBtn").disabled = false;
+  document.getElementById("generateBtn").style.opacity = "1";
+
   return;
 }
 
@@ -536,7 +537,7 @@ localStorage.setItem("savedReview", data.review);
 if(data.already){
   document.getElementById("output").value = data.review;
 
-  alert("You have already generated review for this QR");
+  alert("✅ Review already generated. Please paste it on GMB Profile.");
 
   disableUI();
 
@@ -546,7 +547,7 @@ if(data.already){
 /* ✅ FIRST TIME SUCCESS */
 document.getElementById("output").value=data.review;
 
-document.getElementById("copyBtn").style.display = "none"; // 🔥 first time hide
+document.getElementById("copyBtn").style.display = "block"; // 🔥 first time hide
 
 
 /* 🔥 AUTO COPY (NO POPUP) */
@@ -562,6 +563,7 @@ try{
 }
 
 /* 🔥 DIRECT GMB OPEN */
+ alert("✅ Review copied! Now paste it on GMB Profile.");
 window.location.href = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ";
 
 /* 🔥 DISABLE UI */
