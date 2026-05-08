@@ -299,13 +299,13 @@ button[type="submit"]:hover{
 <label>Select Review Method</label>
 
 <select id="reviewMode" onchange="toggleReviewMode()">
+  <option value="auto" selected>⚡ Automatic Review</option>
   <option value="speak">🎤 Speak Review</option>
-  <option value="auto">⚡ Automatic Review</option>
 </select>
 </div>
 
 <!-- 🔥 SPEAK SECTION -->
-<div id="speakSection">
+<div id="speakSection" style="display:none;">
 
   <div class="section">
   <label>Select Language</label>
@@ -338,7 +338,7 @@ button[type="submit"]:hover{
 </div>
 
 <!-- 🔥 AUTO SECTION -->
-<div id="autoSection" style="display:none;">
+<div id="autoSection">
 
   <div class="section">
   <button type="button" id="autoBtn" onclick="generateAutomaticReview()">
