@@ -318,6 +318,12 @@ button[type="submit"]:hover{
 <button type="submit" id="generateBtn">Generate Review</button>
 </div>
 
+<div class="section">
+<button type="button" id="autoBtn" onclick="generateAutomaticReview()">
+⚡ Automatic Generate Review
+</button>
+</div>
+
 </form>
 
 <textarea id="output" placeholder="Generated review"></textarea>
@@ -623,7 +629,106 @@ window.startListening = startListening;
 
   alert("Copied ✅");
 }
-  
+
+
+  /* 🔥 AUTO REVIEW GENERATOR */
+async function generateAutomaticReview(){
+
+  if(!tokenReady){
+    alert("Please wait, loading...");
+    return;
+  }
+
+  const services = [...document.querySelectorAll('input[name="services"]:checked')]
+    .map(el => el.value);
+
+  const rating = document.getElementById("rating").value;
+  const location = document.getElementById("location").value;
+
+  if(!services.length){
+    alert("Please select at least one service");
+    return;
+  }
+
+  if(!rating){
+    alert("Please select rating");
+    return;
+  }
+
+  if(!location){
+    alert("Please enter location");
+    return;
+  }
+
+  if(rating <= 3){
+    alert("Thanks for your feedback 🙏");
+    return;
+  }
+
+  /* 🔥 BUTTON DISABLE */
+  document.getElementById("autoBtn").disabled = true;
+  document.getElementById("autoBtn").style.opacity = "0.5";
+
+  /* 🔥 AUTOMATIC PROMPT */
+  const autoInput = `
+Customer had a great experience with ${services.join(", ")} service in ${location}.
+Generate a natural human-written positive Google review.
+`;
+
+  /* 🔥 API CALL */
+  const res = await fetch("https://marketingsennna.onrender.com/generate",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      services,
+      location,
+      input:autoInput,
+      token,
+      source
+    })
+  });
+
+  const data = await res.json();
+
+  if(data.review.includes("Please try again")){
+    alert("⚠️ Something went wrong. Please try again.");
+
+    document.getElementById("autoBtn").disabled = false;
+    document.getElementById("autoBtn").style.opacity = "1";
+
+    return;
+  }
+
+  /* 🔥 ALREADY GENERATED */
+  if(data.already){
+    document.getElementById("output").value = data.review;
+
+    alert("✅ Review already generated. Please paste it on GMB Profile.");
+
+    disableUI();
+
+    return;
+  }
+
+  /* 🔥 SHOW REVIEW */
+  document.getElementById("output").value = data.review;
+
+  localStorage.setItem("savedReview", data.review);
+
+  document.getElementById("copyBtn").style.display = "block";
+
+  /* 🔥 AUTO COPY */
+  try{
+    await navigator.clipboard.writeText(data.review);
+  }catch{}
+
+  alert("✅ Review copied! Now paste it on GMB Profile.");
+
+  window.location.href =
+    "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ";
+
+  disableUI();
+}
 </script>
 
 </body>
