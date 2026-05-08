@@ -294,7 +294,7 @@ button[type="submit"]:hover{
 <input type="text" id="location" placeholder="e.g. Vesu, Surat">
 </div>
 
-  <!-- 🔥 REVIEW MODE SELECTOR -->
+<!-- 🔥 REVIEW MODE SELECTOR -->
 <div class="section">
 <label>Select Review Method</label>
 
@@ -304,38 +304,48 @@ button[type="submit"]:hover{
 </select>
 </div>
 
-  <div id="speakSection">
+<!-- 🔥 SPEAK SECTION -->
+<div id="speakSection">
+
   <div class="section">
-<label>Select Language</label>
-<select id="langSelect">
+  <label>Select Language</label>
+
+  <select id="langSelect">
     <option value="hi-IN">Hindi</option>
-  <option value="gu-IN">Gujarati</option>
-  <option value="en-IN">English</option>
-</select>
-</div>
-
-<div class="section">
-<button type="button" id="micBtn" onclick="startListening()">
-🎤 Start Speaking
-</button>
-<p class="note">Speak your experience</p>
-</div>
-
-<div class="section">
-<textarea id="inputText" placeholder="Write your experience..."></textarea>
-</div>
-    
-<div class="section">
-<button type="submit" id="generateBtn">Generate Review</button>
-</div>
-
-<div id="autoSection" style="display:none;">
+    <option value="gu-IN">Gujarati</option>
+    <option value="en-IN">English</option>
+  </select>
   </div>
-    
-<div class="section">
-<button type="button" id="autoBtn" onclick="generateAutomaticReview()">
-⚡ Automatic Generate Review
-</button>
+
+  <div class="section">
+  <button type="button" id="micBtn" onclick="startListening()">
+    🎤 Start Speaking
+  </button>
+
+  <p class="note">Speak your experience</p>
+  </div>
+
+  <div class="section">
+  <textarea id="inputText" placeholder="Write your experience..."></textarea>
+  </div>
+
+  <div class="section">
+  <button type="submit" id="generateBtn">
+    Generate Review
+  </button>
+  </div>
+
+</div>
+
+<!-- 🔥 AUTO SECTION -->
+<div id="autoSection" style="display:none;">
+
+  <div class="section">
+  <button type="button" id="autoBtn" onclick="generateAutomaticReview()">
+    ⚡ Automatic Generate Review
+  </button>
+  </div>
+
 </div>
 
 </form>
