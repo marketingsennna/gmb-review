@@ -294,6 +294,17 @@ button[type="submit"]:hover{
 <input type="text" id="location" placeholder="e.g. Vesu, Surat">
 </div>
 
+  <!-- 🔥 REVIEW MODE SELECTOR -->
+<div class="section">
+<label>Select Review Method</label>
+
+<select id="reviewMode" onchange="toggleReviewMode()">
+  <option value="speak">🎤 Speak Review</option>
+  <option value="auto">⚡ Automatic Review</option>
+</select>
+</div>
+
+  <div id="speakSection">
   <div class="section">
 <label>Select Language</label>
 <select id="langSelect">
@@ -313,11 +324,14 @@ button[type="submit"]:hover{
 <div class="section">
 <textarea id="inputText" placeholder="Write your experience..."></textarea>
 </div>
-
+    
 <div class="section">
 <button type="submit" id="generateBtn">Generate Review</button>
 </div>
 
+<div id="autoSection" style="display:none;">
+  </div>
+    
 <div class="section">
 <button type="button" id="autoBtn" onclick="generateAutomaticReview()">
 ⚡ Automatic Generate Review
@@ -618,6 +632,24 @@ window.addEventListener("load", async ()=>{
     document.getElementById("copyBtn").style.display = "block";
   }
 });
+
+
+  /* 🔥 TOGGLE REVIEW MODE */
+function toggleReviewMode(){
+
+  const mode = document.getElementById("reviewMode").value;
+
+  const speakSection = document.getElementById("speakSection");
+  const autoSection = document.getElementById("autoSection");
+
+  if(mode === "speak"){
+    speakSection.style.display = "block";
+    autoSection.style.display = "none";
+  }else{
+    speakSection.style.display = "none";
+    autoSection.style.display = "block";
+  }
+}
 
 /* 🔥 GLOBAL FUNCTION FIX */
 window.startListening = startListening;
