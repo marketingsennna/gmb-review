@@ -13,7 +13,7 @@
   --text:#0f172a;
 }
 
-/* 🌈 PROPER VISIBLE GRADIENT */
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
   background:linear-gradient(-45deg,#1e40af,#2563eb,#4f46e5,#0ea5e9);
@@ -29,7 +29,7 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* 💎 CARD (NO ZOOM EFFECT) */
+
 .container{
   max-width:620px;
   margin:auto;
@@ -37,25 +37,23 @@ body{
   border-radius:20px;
   padding:24px;
 
-  /* 🔥 STRONG 3D SHADOW */
+ 
   box-shadow:
     0 25px 60px rgba(0,0,0,0.25),
     0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* ❌ REMOVE HOVER ZOOM COMPLETELY */
+
 .container:hover{
   transform:none;
 }
 
-/* TEXT */
+
 h1{text-align:center}
 .sub{text-align:center;color:#64748b;margin-bottom:20px}
 .section{margin-bottom:18px}
 
-/* SERVICES */
-  
-/* SERVICES */
+
 .services{
   max-height:220px;
   overflow:auto;
@@ -67,7 +65,7 @@ h1{text-align:center}
   box-shadow:inset 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* SERVICE ITEM */
+
 .services label{
   display:flex;
   align-items:center;
@@ -76,29 +74,24 @@ h1{text-align:center}
   border-radius:8px;
   cursor:pointer;
 
-  /* 🔥 spacing */
   margin-bottom:8px;
 
-  /* 🔥 smooth animation */
   transition:all 0.25s ease;
 }
 
-/* last item spacing fix */
 .services label:last-child{
   margin-bottom:0;
 }
 
-/* hover */
 .services label:hover{
   background:#eff6ff;
 }
 
-/* checkbox */
 .services input{
   accent-color:var(--primary);
 }
 
-/* 🔥 SELECTED STATE (lift + glow) */
+
 .services label:has(input:checked){
   background:linear-gradient(135deg,#dbeafe,#bfdbfe);
   font-weight:600;
@@ -107,13 +100,13 @@ h1{text-align:center}
   border:1px solid #93c5fd;
 }
 
-/* 🔥 hover + selected combo */
+
 .services label:has(input:checked):hover{
   transform:translateY(-3px) scale(1.01);
   box-shadow:0 10px 25px rgba(37,99,235,0.35);
 }
 
-/* 🔥 FIX WIDTH ISSUE (VERY IMPORTANT) */
+
 input[type="text"], 
 select, 
 textarea, 
@@ -123,7 +116,7 @@ button{
   display:block;
 }
 
-/* INPUT */
+
 input[type="text"], select{
   padding:12px;
   border-radius:12px;
@@ -132,7 +125,7 @@ input[type="text"], select{
   box-sizing:border-box;
 }
 
-/* TEXTAREA FIX */
+
 textarea{
   height:140px;
   margin-top:8px;
@@ -140,10 +133,10 @@ textarea{
   border-radius:14px;
   border:1px solid #e2e8f0;
   background:#fff;
-  box-sizing:border-box; /* 🔥 IMPORTANT */
+  box-sizing:border-box; 
 }
 
-/* 🎤 SPEAK BUTTON */
+
 button[type="button"]{
   border:none;
   border-radius:14px;
@@ -161,7 +154,7 @@ button[type="button"]:hover{
   box-shadow:0 6px 18px rgba(37,99,235,0.4);
 }
 
-/* 🎯 GENERATE BUTTON */
+
 button[type="submit"]{
   border:none;
   border-radius:16px;
@@ -191,7 +184,7 @@ button[type="submit"]:hover{
   margin-top:16px;
 }
 
-  /* 🔥 COPY BUTTON PREMIUM STYLE */
+ 
 .copy-btn{
   margin-top:14px; /* textarea से gap */
   width:100%;
@@ -202,7 +195,7 @@ button[type="submit"]:hover{
   font-weight:600;
   cursor:pointer;
 
-  /* 🔥 DARK BLUE + RED GRADIENT */
+
   background:linear-gradient(135deg,#0f172a,#1e3a8a,#dc2626);
   color:#fff;
 
@@ -210,18 +203,15 @@ button[type="submit"]:hover{
   transition:all 0.25s ease;
 }
 
-/* 🔥 HOVER EFFECT */
 .copy-btn:hover{
   transform:translateY(-2px) scale(1.01);
   box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* 🔥 ACTIVE CLICK */
 .copy-btn:active{
   transform:scale(0.97);
 }
 
-/* 🔥 ATTENTION GLOW */
 .copy-btn{
   animation:glowPulse 2s infinite;
 }
@@ -294,7 +284,7 @@ button[type="submit"]:hover{
 <input type="text" id="location" placeholder="e.g. Vesu, Surat">
 </div>
 
-<!-- 🔥 REVIEW MODE SELECTOR -->
+
 <div class="section">
 <label>Select Review Method</label>
 
@@ -304,7 +294,7 @@ button[type="submit"]:hover{
 </select>
 </div>
 
-<!-- 🔥 SPEAK SECTION -->
+
 <div id="speakSection" style="display:none;">
 
   <div class="section">
@@ -337,7 +327,7 @@ button[type="submit"]:hover{
 
 </div>
 
-<!-- 🔥 AUTO SECTION -->
+
 <div id="autoSection">
 
   <div class="section">
@@ -368,13 +358,13 @@ const source = params.get("src") || "direct";
 let token = localStorage.getItem("reviewToken") || "";
 let tokenReady = false;
 
-/* 🔥 TOKEN INIT */
+
 async function initToken(){
   if(!token){
     const res = await fetch("https://marketingsennna.onrender.com/get-token");
     const data = await res.json();
 
-    token = data.token; // 🔥 GLOBAL UPDATE
+    token = data.token; 
     localStorage.setItem("reviewToken", token);
   }
   tokenReady = true;
@@ -382,7 +372,7 @@ async function initToken(){
 
 initToken();
 
-/* 🔥 REFRESH CONTROL */
+
 window.addEventListener("beforeunload", ()=>{
   localStorage.setItem("isReload", "true");
 });
@@ -459,13 +449,13 @@ recognition.lang = selectedLang;
 
   const isMobile = /iPhone|Android/i.test(navigator.userAgent);
 
-  // 🔥 DEVICE BASED SETTINGS
+
   if(isMobile){
     recognition.continuous = false;
     recognition.interimResults = false;
   }else{
-    recognition.continuous = true;   // 💻 keep listening
-    recognition.interimResults = true; // 💻 live typing
+    recognition.continuous = true;   
+    recognition.interimResults = true; 
   }
 
 let finalTranscript = document.getElementById("inputText").value || "";
@@ -497,7 +487,7 @@ let lastFinal = finalTranscript;
       finalTranscript + interim;
   };
 
-  // 🔥 AUTO RESTART (IGNORE SILENCE)
+  
   recognition.onend = function(){
     if(!isMobile && isListening){
       recognition.start(); // 💻 restart automatically
@@ -508,7 +498,7 @@ let lastFinal = finalTranscript;
   };
 }
   
-/* 🔥 FORM SUBMIT */
+
 document.getElementById("form").addEventListener("submit",async(e)=>{
 e.preventDefault();
 
@@ -547,11 +537,11 @@ if(rating<=3){
   return;
 }
 
-  /* 🔥 PREVENT DOUBLE CLICK */
+
 document.getElementById("generateBtn").disabled = true;
 document.getElementById("generateBtn").style.opacity = "0.5";
 
-/* 🔥 API CALL */
+
 const res = await fetch("https://marketingsennna.onrender.com/generate",{
   method:"POST",
   headers:{"Content-Type":"application/json"},
@@ -564,7 +554,7 @@ const res = await fetch("https://marketingsennna.onrender.com/generate",{
   })
 });
 
-/* ✅ FIXED (inside function) */
+
 const data = await res.json();
 if(data.review.includes("Please try again")){
   alert("⚠️ Something went wrong. Please click Generate again.");
@@ -577,7 +567,7 @@ if(data.review.includes("Please try again")){
 
 localStorage.setItem("savedReview", data.review);
 
-/* 🔥 ALREADY GENERATED */
+
 if(data.already){
   document.getElementById("output").value = data.review;
 
@@ -588,13 +578,13 @@ if(data.already){
   return;
 }
 
-/* ✅ FIRST TIME SUCCESS */
+
 document.getElementById("output").value=data.review;
 
-document.getElementById("copyBtn").style.display = "block"; // 🔥 first time hide
+document.getElementById("copyBtn").style.display = "block"; 
 
 
-/* 🔥 AUTO COPY (NO POPUP) */
+
 try{
   await navigator.clipboard.writeText(data.review);
 }catch{
@@ -606,45 +596,45 @@ try{
   document.body.removeChild(temp);
 }
 
-/* 🔥 DIRECT GMB OPEN */
+
  alert("✅ Review copied! Now paste it on GMB Profile.");
 window.location.href = "https://search.google.com/local/writereview?placeid=ChIJQWh0uNEbw2MRWT7vlIaLRLQ";
 
-/* 🔥 DISABLE UI */
+
 disableUI();
 
-}); // FORM SUBMIT CLOSE
+}); 
 
-/* 🔥 PAGE LOAD CHECK */
+
 window.addEventListener("load", async ()=>{
   const saved = localStorage.getItem("savedReview");
 
   const alreadyDone = localStorage.getItem("savedReview");
   if(alreadyDone){
-  disableUI(); // 🔥 form block
+  disableUI(); 
   }
 
   if(saved){
     const textarea = document.getElementById("output");
     textarea.value = saved;
 
-    /* 🔥 AUTO SELECT TEXT */
+  
     textarea.focus();
     textarea.select();
 
-    /* 🔥 TRY AUTO COPY (may fail silently) */
+    
     try{
       await navigator.clipboard.writeText(saved);
     }catch{
       // ignore (browser block)
     }
-     /* 🔥 SHOW COPY BUTTON (ADD HERE) */
+     
     document.getElementById("copyBtn").style.display = "block";
   }
 });
 
 
-  /* 🔥 TOGGLE REVIEW MODE */
+ 
 function toggleReviewMode(){
 
   const mode = document.getElementById("reviewMode").value;
@@ -661,7 +651,7 @@ function toggleReviewMode(){
   }
 }
 
-/* 🔥 GLOBAL FUNCTION FIX */
+
 window.startListening = startListening;
 
   function copyAgain(){
@@ -673,7 +663,7 @@ window.startListening = startListening;
 }
 
 
-  /* 🔥 AUTO REVIEW GENERATOR */
+  
 async function generateAutomaticReview(){
 
   if(!tokenReady){
@@ -707,17 +697,17 @@ async function generateAutomaticReview(){
     return;
   }
 
-  /* 🔥 BUTTON DISABLE */
+  
   document.getElementById("autoBtn").disabled = true;
   document.getElementById("autoBtn").style.opacity = "0.5";
 
-  /* 🔥 AUTOMATIC PROMPT */
+ 
   const autoInput = `
 Customer had a great experience with ${services.join(", ")} service in ${location}.
 Generate a natural human-written positive Google review.
 `;
 
-  /* 🔥 API CALL */
+ 
   const res = await fetch("https://marketingsennna.onrender.com/generate",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
@@ -741,7 +731,7 @@ Generate a natural human-written positive Google review.
     return;
   }
 
-  /* 🔥 ALREADY GENERATED */
+ 
   if(data.already){
     document.getElementById("output").value = data.review;
 
@@ -752,14 +742,14 @@ Generate a natural human-written positive Google review.
     return;
   }
 
-  /* 🔥 SHOW REVIEW */
+ 
   document.getElementById("output").value = data.review;
 
   localStorage.setItem("savedReview", data.review);
 
   document.getElementById("copyBtn").style.display = "block";
 
-  /* 🔥 AUTO COPY */
+  
   try{
     await navigator.clipboard.writeText(data.review);
   }catch{}
